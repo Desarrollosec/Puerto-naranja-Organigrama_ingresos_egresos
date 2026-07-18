@@ -28,7 +28,7 @@
 
         .section-container { background: var(--surface-color); border-radius: var(--border-radius); padding: 2rem; margin-bottom: 2rem; border: 1px solid rgba(255, 94, 0, 0.2); }
 
-        /* --- Organigrama Masivo (CSS Grid / Flex / Árbol Mejorado) --- */
+        /* --- Organigrama Masivo --- */
         .org-wrapper { overflow-x: auto; padding-bottom: 1rem; }
         
         .tree-level { display: flex; justify-content: center; gap: 2rem; position: relative; padding-top: 2rem; margin-top: 1rem; }
@@ -56,7 +56,7 @@
         .dept-column { display: flex; flex-direction: column; gap: 1rem; align-items: center; margin-top: 1rem; position: relative; padding-top: 1rem; }
         .dept-column::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 2px; height: 100%; background-color: rgba(255, 94, 0, 0.3); z-index: 0; }
 
-        /* Botones de Acción (Rubrica) */
+        /* Botones de Acción */
         .action-buttons { display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap; border-top: 1px dashed rgba(255, 94, 0, 0.3); padding-top: 2rem; }
         .btn-action { background: transparent; color: var(--neon-orange); border: 2px solid var(--neon-orange); padding: 1rem 2rem; font-size: 1.1rem; font-weight: bold; border-radius: var(--border-radius); cursor: pointer; text-transform: uppercase; transition: var(--transition); letter-spacing: 1px; }
         .btn-action:hover { background: var(--neon-orange); color: var(--bg-color); box-shadow: var(--neon-glow); transform: translateY(-3px); }
@@ -64,7 +64,7 @@
         /* Modales */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: var(--transition); z-index: 1000; overflow-y: auto; padding: 2rem; }
         .modal-overlay.active { opacity: 1; pointer-events: all; }
-        .modal-content { background: var(--surface-color); padding: 2.5rem; border-radius: var(--border-radius); border: 1px solid var(--neon-orange); box-shadow: var(--neon-glow); max-width: 700px; width: 100%; position: relative; max-height: 90vh; overflow-y: auto; }
+        .modal-content { background: var(--surface-color); padding: 2.5rem; border-radius: var(--border-radius); border: 1px solid var(--neon-orange); box-shadow: var(--neon-glow); max-width: 800px; width: 100%; position: relative; max-height: 90vh; overflow-y: auto; }
         
         /* Modal - Cabecera Role */
         .close-btn { position: absolute; top: 15px; right: 20px; color: var(--neon-orange); font-size: 2rem; cursor: pointer; background: none; border: none; line-height: 1; }
@@ -74,14 +74,20 @@
         #modalRole { color: var(--text-muted); font-size: 1rem; }
         #modalDesc { font-size: 1.05rem; line-height: 1.7; }
 
-        /* Modal - Texto Largo (Políticas / Pitch) */
-        .modal-title { color: var(--neon-orange); font-size: 1.8rem; margin-bottom: 0.5rem; border-bottom: 2px solid var(--neon-orange); padding-bottom: 0.5rem; }
-        .modal-subtitle { color: #888; font-style: italic; margin-bottom: 1.5rem; }
-        .modal-text-content h3 { color: var(--text-main); margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1.2rem; display: flex; align-items: center; gap: 0.5rem; }
-        .modal-text-content h3::before { content: '■'; color: var(--neon-orange); font-size: 0.8rem; }
-        .modal-text-content p { font-size: 1rem; line-height: 1.6; color: #b0b0b0; margin-bottom: 1rem; margin-left: 1.2rem; }
-        .modal-text-content ul { margin-left: 2.5rem; margin-bottom: 1rem; color: #b0b0b0; }
-        .modal-text-content li { margin-bottom: 0.3rem; }
+        /* Modal - Texto Largo Mejorado */
+        .modal-title { color: var(--neon-orange); font-size: 1.8rem; margin-bottom: 0.5rem; border-bottom: 2px solid var(--neon-orange); padding-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
+        .modal-subtitle { color: #888; font-style: italic; margin-bottom: 1.5rem; font-size: 1.1rem; }
+        .modal-text-content h3 { color: #fff; margin-top: 1.8rem; margin-bottom: 0.8rem; font-size: 1.25rem; display: flex; align-items: center; gap: 0.5rem; background: rgba(255, 94, 0, 0.1); padding: 0.5rem 1rem; border-left: 3px solid var(--neon-orange); border-radius: 0 4px 4px 0; }
+        .modal-text-content p { font-size: 1rem; line-height: 1.6; color: #ccc; margin-bottom: 1rem; }
+        .modal-text-content ul { margin-left: 2rem; margin-bottom: 1.5rem; color: #ccc; }
+        .modal-text-content li { margin-bottom: 0.5rem; line-height: 1.5; }
+        .modal-text-content strong { color: var(--neon-orange); }
+
+        /* Bloque de Guion para el Pitch */
+        .script-box { background: #111; border: 1px solid #333; border-radius: 8px; padding: 1.5rem; margin-top: 1rem; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); }
+        .script-line { margin-bottom: 1rem; display: flex; flex-direction: column; }
+        .script-role { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--neon-orange); margin-bottom: 0.2rem; font-weight: bold; }
+        .script-text { font-size: 1.05rem; color: #eaeaea; font-style: italic; border-left: 2px solid #333; padding-left: 1rem; margin-left: 0.5rem; }
 
         /* Finanzas */
         .btn-toggle { width: 100%; background: transparent; color: var(--neon-orange); border: 2px solid var(--neon-orange); padding: 1rem; font-size: 1.2rem; font-weight: bold; border-radius: var(--border-radius); cursor: pointer; text-transform: uppercase; }
@@ -102,7 +108,19 @@
         .dashboard-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem; background: var(--bg-color); padding: 1.5rem; border-radius: var(--border-radius); border: 1px solid var(--neon-orange); }
         .stat-item { text-align: center; }
         .stat-value { display: block; font-size: 1.5rem; color: var(--neon-orange); font-weight: bold; margin-bottom: 0.5rem; }
-        
+
+        /* Gráfico de Distribución */
+        .chart-wrapper { margin-top: 2rem; padding: 1.5rem; background: var(--bg-color); border: 1px solid #333; border-radius: var(--border-radius); }
+        .chart-title { text-align: center; margin-bottom: 1rem; color: var(--neon-orange); font-size: 1.1rem; }
+        .expense-chart { display: flex; height: 35px; border-radius: 6px; overflow: hidden; background: #222; width: 100%; box-shadow: inset 0 2px 5px rgba(0,0,0,0.5); }
+        .bar-segment { height: 100%; transition: width 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; color: #fff; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
+        .segment-nomina { background: linear-gradient(90deg, #FF5E00, #ff8c42); }
+        .segment-cargas { background: linear-gradient(90deg, #ffd700, #ffea75); color: #333; text-shadow: none; }
+        .segment-opex { background: linear-gradient(90deg, #00bcd4, #4dd0e1); }
+        .chart-legend { display: flex; justify-content: center; gap: 2rem; margin-top: 1rem; font-size: 0.9rem; flex-wrap: wrap; }
+        .legend-item { display: flex; align-items: center; gap: 0.5rem; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+
         .side-staff-box { margin-top: 3rem; padding: 1.5rem; border: 1px dashed var(--neon-orange); border-radius: var(--border-radius); text-align: center; }
         .side-staff-box h3 { margin-bottom: 1rem; color: var(--neon-orange); }
         .side-staff-grid { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
@@ -175,7 +193,7 @@
                     </div>
                 </div>
 
-                <!-- Multimedia y Producción (Se eliminó al Gaffer, equipo de 5) -->
+                <!-- Multimedia y Producción -->
                 <div class="branch-item">
                     <div class="org-card" onclick="openRoleModal('Carlos Balseca', 'Director Multimedia', 'Jefe de producción audiovisual. Lidera al equipo técnico en rodajes, postproducción y entrega final.', 'imgs/carlos.jpg')">
                         <h3>Carlos Balseca</h3><p>Director Multimedia</p>
@@ -231,7 +249,7 @@
             </div>
         </div>
 
-        <!-- Botones de Acción (Requisitos de la Rúbrica) -->
+        <!-- Botones de Acción -->
         <div class="action-buttons">
             <button class="btn-action" onclick="openModal('policyModal')">Políticas y Normativas</button>
             <button class="btn-action" onclick="openModal('pitchModal')">Pitch Cliente Exigente</button>
@@ -244,20 +262,20 @@
         
         <div class="finance-panel" id="financePanel">
             <p style="margin-bottom: 1rem; color: var(--text-muted); font-size: 0.9rem;">
-                <em>* Valores en Galeones. Ajustes: -30% Dirección | -8% Resto del equipo | 22 Empleados. Presiona <strong>Ctrl + .</strong> para habilitar edición.</em>
+                <em>* Valores en Galeones. Gastos optimizados para rentabilidad. Presiona <strong>Ctrl + .</strong> para habilitar edición (USD Referencial: $6.64 = 1 Galeón).</em>
             </p>
             
             <div class="finance-grid">
                 <!-- Nómina -->
                 <div class="finance-box">
-                    <h3 style="color: var(--neon-orange); margin-bottom: 1rem;">Nómina (22 Empleados)</h3>
-                    <div class="finance-row"><span>Dir (Jorge+Mateo) [-30%]</span> <span><input type="number" class="calc-input salary" value="369" readonly> G</span></div>
-                    <div class="finance-row"><span>Cuentas (Jefa+3) [-8%]</span> <span><input type="number" class="calc-input salary" value="498" readonly> G</span></div>
-                    <div class="finance-row"><span>RRPP (Majo+1) [-8%]</span> <span><input type="number" class="calc-input salary" value="235" readonly> G</span></div>
-                    <div class="finance-row"><span>Multimedia (Dir+5) [-8%]</span> <span><input type="number" class="calc-input salary" value="762" readonly> G</span></div>
-                    <div class="finance-row"><span>Arte (Andres+2) [-8%]</span> <span><input type="number" class="calc-input salary" value="402" readonly> G</span></div>
-                    <div class="finance-row"><span>Data (Dayanna+1) [-8%]</span> <span><input type="number" class="calc-input salary" value="277" readonly> G</span></div>
-                    <div class="finance-row"><span>Staff (Cont/RRHH/SG) [-8%]</span> <span><input type="number" class="calc-input salary" value="291" readonly> G</span></div>
+                    <h3 style="color: var(--neon-orange); margin-bottom: 1rem;">Nómina Base (22 Empleados)</h3>
+                    <div class="finance-row"><span>Dir (Jorge+Mateo) [$797]</span> <span><input type="number" class="calc-input salary" value="120" readonly> G</span></div>
+                    <div class="finance-row"><span>Cuentas (Jefa+3) [$1527]</span> <span><input type="number" class="calc-input salary" value="230" readonly> G</span></div>
+                    <div class="finance-row"><span>RRPP (Majo+1) [$531]</span> <span><input type="number" class="calc-input salary" value="80" readonly> G</span></div>
+                    <div class="finance-row"><span>Multimedia (Dir+5) [$2390]</span> <span><input type="number" class="calc-input salary" value="360" readonly> G</span></div>
+                    <div class="finance-row"><span>Arte (Andres+2) [$1062]</span> <span><input type="number" class="calc-input salary" value="160" readonly> G</span></div>
+                    <div class="finance-row"><span>Data (Dayanna+1) [$730]</span> <span><input type="number" class="calc-input salary" value="110" readonly> G</span></div>
+                    <div class="finance-row"><span>Staff (Cont/RRHH/SG) [$930]</span> <span><input type="number" class="calc-input salary" value="140" readonly> G</span></div>
                     <div class="finance-row total">
                         <span>Subtotal Nómina</span> 
                         <span id="totNominaDec" style="display:none;"></span>
@@ -271,12 +289,12 @@
                     <div class="finance-row"><span>IESS (12.15%)</span> <span class="magic-currency" id="valIESS"></span></div>
                     <div class="finance-row"><span>Décimos (16.66%)</span> <span class="magic-currency" id="valDecimos"></span></div>
                     <div class="finance-row"><span>Pauta Propia [$5000]</span> <span><input type="number" class="calc-input opex" value="753" readonly> G</span></div>
-                    <div class="finance-row"><span>Arriendo Estudio [-8%]</span> <span><input type="number" class="calc-input opex" value="184" readonly> G</span></div>
-                    <div class="finance-row"><span>Agua/Luz x22 [-8%]</span> <span><input type="number" class="calc-input opex" value="69" readonly> G</span></div>
-                    <div class="finance-row"><span>Internet Fibra [-8%]</span> <span><input type="number" class="calc-input opex" value="23" readonly> G</span></div>
-                    <div class="finance-row"><span>Mantenimiento [-8%]</span> <span><input type="number" class="calc-input opex" value="46" readonly> G</span></div>
-                    <div class="finance-row"><span>Suministros [-8%]</span> <span><input type="number" class="calc-input opex" value="37" readonly> G</span></div>
-                    <div class="finance-row"><span>Software y Cloud [-8%]</span> <span><input type="number" class="calc-input opex" value="55" readonly> G</span></div>
+                    <div class="finance-row"><span>Arriendo Estudio [$332]</span> <span><input type="number" class="calc-input opex" value="50" readonly> G</span></div>
+                    <div class="finance-row"><span>Agua/Luz x22 [$100]</span> <span><input type="number" class="calc-input opex" value="15" readonly> G</span></div>
+                    <div class="finance-row"><span>Internet Fibra [$66]</span> <span><input type="number" class="calc-input opex" value="10" readonly> G</span></div>
+                    <div class="finance-row"><span>Mantenimiento [$100]</span> <span><input type="number" class="calc-input opex" value="15" readonly> G</span></div>
+                    <div class="finance-row"><span>Suministros [$66]</span> <span><input type="number" class="calc-input opex" value="10" readonly> G</span></div>
+                    <div class="finance-row"><span>Software y Cloud [$133]</span> <span><input type="number" class="calc-input opex" value="20" readonly> G</span></div>
                     <div class="finance-row total">
                         <span>Total Operaciones</span> 
                         <div class="magic-currency" id="totOpsMag"></div>
@@ -287,9 +305,8 @@
             <!-- Resumen Financiero -->
             <div class="dashboard-stats">
                 <div class="stat-item">
-                    <span>Facturación Proyectada</span>
-                    <!-- Facturación ajustada a 14000 para forzar el margen del 65%+ -->
-                    <span class="stat-value"><input type="number" id="ingresoTotal" class="calc-input" value="14000" readonly style="font-size: 1.5rem; width:120px; font-weight:bold; color:white;"></span>
+                    <span>Facturación del mes</span>
+                    <span class="stat-value"><input type="number" id="ingresoTotal" class="calc-input" value="7000" readonly style="font-size: 1.5rem; width:120px; font-weight:bold; color:white;"></span>
                 </div>
                 <div class="stat-item">
                     <span>Egresos Totales</span>
@@ -304,7 +321,32 @@
                     <span class="stat-value" id="margenPorcentaje" style="color: var(--neon-orange);"></span>
                 </div>
             </div>
-            <p style="text-align:center; color: #33ff77; margin-top: 1rem; font-size: 0.9rem;" id="warningText"></p>
+
+            <!-- Gráfico de Distribución del Gasto -->
+            <div class="chart-wrapper">
+                <h3 class="chart-title">Distribución del Gasto Total</h3>
+                <div class="expense-chart">
+                    <div class="bar-segment segment-nomina" id="barNomina" style="width: 0%;"></div>
+                    <div class="bar-segment segment-cargas" id="barCargas" style="width: 0%;"></div>
+                    <div class="bar-segment segment-opex" id="barOpex" style="width: 0%;"></div>
+                </div>
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <div class="dot segment-nomina"></div>
+                        <span>Nómina Base (<span id="pctNomina">0</span>%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="dot segment-cargas"></div>
+                        <span>Cargas Legales (<span id="pctCargas">0</span>%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="dot segment-opex"></div>
+                        <span>Operaciones/Pauta (<span id="pctOpex">0</span>%)</span>
+                    </div>
+                </div>
+            </div>
+
+            <p style="text-align:center; margin-top: 1rem; font-size: 0.9rem;" id="warningText"></p>
         </div>
     </section>
 
@@ -323,108 +365,107 @@
         </div>
     </div>
 
-    <!-- MODAL 2: Políticas y Normativas -->
+    <!-- MODAL 2: Políticas y Normativas (Detallado Corporate) -->
     <div class="modal-overlay" id="policyModal" onclick="closeOnOutsideClick(event, 'policyModal')">
         <div class="modal-content">
             <button class="close-btn" onclick="closeAllModals()">×</button>
-            <h2 class="modal-title">Políticas y Normativas Internas</h2>
-            <p class="modal-subtitle">Proceso operativo estándar (SOP) para el equipo de Puerto Naranja.</p>
+            <h2 class="modal-title">SOP: Políticas y Normativas Internas</h2>
+            <p class="modal-subtitle">Documento Oficial de Operaciones - Agencia Puerto Naranja v.2.1</p>
             
             <div class="modal-text-content">
-                <h3>1. Canalización de Requerimientos (Briefing)</h3>
-                <p>Paso fundamental para proteger el flujo de trabajo:</p>
+                <h3>1. Flujo de Trabajo y Sistema de Ticketing</h3>
+                <p>Para proteger el ecosistema creativo y evitar el "burnout" operativo, se establecen los siguientes parámetros irrevocables:</p>
                 <ul>
-                    <li>Todo pedido de cliente ingresa <strong>únicamente</strong> por la Ejecutiva de Cuentas asignada.</li>
-                    <li>Prohibido el contacto directo entre cliente y áreas operativas (Arte/Multimedia) sin un brief aprobado.</li>
-                    <li>Las horas de producción se agendan en el software interno con 48h de anticipación mínima.</li>
+                    <li><strong>Prohibición de Briefs Informales:</strong> Todo requerimiento debe ingresar mediante la plataforma de gestión de proyectos (Asana/Jira). Un mensaje de WhatsApp no constituye un pedido oficial.</li>
+                    <li><strong>Triangulación Obligatoria:</strong> Los departamentos operativos (Arte y Multimedia) no mantienen contacto directo con el cliente. La Ejecutiva de Cuentas es el escudo y filtro de toda solicitud.</li>
+                    <li><strong>Tiempos de Ejecución (SLAs):</strong> Campañas macro requieren 15 días laborables de planificación. Piezas gráficas o adaptaciones "Always On" requieren un mínimo de 48 horas de antelación. No existen "entregas para ayer" sin aprobación previa de un <em>Fee de Urgencia</em> (+35% del valor).</li>
                 </ul>
 
-                <h3>2. Control Financiero y Presupuestos</h3>
-                <p>Pasos para la ejecución de gastos:</p>
+                <h3>2. Acuerdos de Confidencialidad y Manejo de Datos (NDA)</h3>
+                <p>Puerto Naranja maneja estrategias de alto nivel, por lo que la seguridad es prioritaria:</p>
                 <ul>
-                    <li>El departamento solicitante levanta una proforma (ej. pauta digital, viáticos de rodaje).</li>
-                    <li>Si el monto excede los 50 Galeones ($332 USD), requiere visto bueno del CMO.</li>
-                    <li>Contabilidad emite el pago los días 15 o 30 del mes.</li>
+                    <li>El equipo completo (incluyendo el departamento de Limpieza y Mantenimiento) firma un acuerdo de confidencialidad al ingreso.</li>
+                    <li><strong>Almacenamiento Cloud:</strong> Todos los editables (.prproj, .psd) son propiedad de la agencia. Deben guardarse en el servidor interno o Drive corporativo. Está prohibido el alojamiento de material sensible en discos duros personales no encriptados.</li>
                 </ul>
 
-                <h3>3. Rondas de Revisión (Milestone Review)</h3>
-                <p>Para garantizar rentabilidad, se establecen límites creativos:</p>
+                <h3>3. Rondas de Revisión (Milestone Review Process)</h3>
+                <p>Para garantizar el margen de utilidad financiera (objetivo >65%), se limita la iteración infinita:</p>
                 <ul>
-                    <li>Entrega de V1 (Versión 1) al cliente.</li>
-                    <li>Recepción de feedback consolidado (no en mensajes aislados).</li>
-                    <li>Límite estricto de <strong>2 rondas de cambios</strong>. Ajustes adicionales se facturan por separado.</li>
+                    <li>Cada pieza o video tiene derecho a <strong>2 rondas de cambios consolidados</strong>.</li>
+                    <li>El cliente debe agrupar todo el feedback de sus departamentos (Legal, Marketing, Gerencia) en un solo documento. Comentarios a cuentagotas paralizan la producción y se contarán como una ronda nueva.</li>
+                    <li>A partir de la 3ra ronda, el Ejecutivo de Cuentas emitirá una factura adicional basada en la tarifa por hora del equipo involucrado.</li>
                 </ul>
 
-                <h3>4. Gestión de Crisis (RRPP)</h3>
-                <p>Pasos de contención inmediata:</p>
+                <h3>4. Gestión de Crisis Digitales (Protocolo Código Rojo)</h3>
+                <p>Accionar inmediato ante ataques a la reputación de las marcas que manejamos:</p>
                 <ul>
-                    <li>El equipo de Data levanta la alerta de crisis digital (comentarios negativos masivos, etc.).</li>
-                    <li>RRPP redacta un Holding Statement (comunicado de espera) en menos de 30 minutos.</li>
-                    <li>Dirección Creativa aprueba el tono del mensaje antes de la publicación oficial.</li>
+                    <li>El Analista de Data activa la alerta silenciosa al detectar picos inusuales de menciones negativas (Sentiment Analytics).</li>
+                    <li>Dirección de RRPP tiene <strong>30 minutos</strong> para redactar un "Holding Statement" (comunicado de espera para ganar tiempo).</li>
+                    <li>Queda estrictamente prohibido que cualquier miembro del equipo responda de forma personal o con ironía en los canales de la marca.</li>
                 </ul>
             </div>
         </div>
     </div>
 
-    <!-- MODAL 3: Pitch Ejecutivo -->
+    <!-- MODAL 3: Pitch Cliente Exigente (Con Guion) -->
     <div class="modal-overlay" id="pitchModal" onclick="closeOnOutsideClick(event, 'pitchModal')">
         <div class="modal-content">
             <button class="close-btn" onclick="closeAllModals()">×</button>
-            <h2 class="modal-title">Propuesta de Gestión: Cliente Exigente</h2>
-            <p class="modal-subtitle">Estrategia de comunicación y defensa de la estructura de 22 personas.</p>
+            <h2 class="modal-title">Playbook: Pitch Ejecutivo</h2>
+            <p class="modal-subtitle">Estrategia de cierre y manejo de objeciones para clientes Tier-1.</p>
             
             <div class="modal-text-content">
-                <h3>Paso 1: Establecer la Autoridad y el Manifiesto</h3>
-                <p>Arrancamos la reunión dejando clara nuestra identidad. Puerto Naranja no es una agencia burocrática más; somos una mezcla perfecta entre la <strong>sabiduría</strong> estratégica que exigen los grandes presupuestos y la <strong>osadía juvenil</strong> necesaria para romper el mercado. Demostramos que tenemos la experiencia de los grandes, combinada con la pasión, el desenfreno y la adrenalina que hace virales a las marcas.</p>
+                <h3>El Enfoque: Sabiduría + Osadía</h3>
+                <p>Los clientes exigentes (grandes transnacionales, corporaciones tradicionales) suelen estar cansados de las agencias "boutique" que solo venden humo, o de las agencias tradicionales que son demasiado lentas. Nuestra postura debe ser contundente: mostramos la solidez y estructura de los grandes, pero golpeamos con la frescura, el desenfreno y la velocidad que demanda el mundo digital de hoy.</p>
+                
+                <h3>Estructura del Pitch</h3>
+                <ul>
+                    <li><strong>Minuto 0-5 (El Manifiesto):</strong> No empezamos mostrando un PPT aburrido. Arrancamos con un video showreel inmersivo (producido por el equipo Multimedia) que despierte adrenalina pura.</li>
+                    <li><strong>Minuto 5-15 (La Estructura Acorazada):</strong> Abrimos el organigrama. Les mostramos que no tercerizamos nada. Tenemos RRPP, Data y Producción "in-house".</li>
+                    <li><strong>Minuto 15-20 (El Cierre Analítico):</strong> Dayanna (Data) muestra cómo esa creatividad explosiva se mide en KPIs y retorno de inversión real.</li>
+                </ul>
 
-                <h3>Paso 2: Justificar la Infraestructura (El Acorazado)</h3>
-                <p>Explicamos por qué 22 personas. Un cliente exigente requiere tiempos de respuesta inmediatos. Les mostramos que al tener departamentos In-House (Multimedia completo, RRPP, Data), no dependemos de terceros. El cliente no paga por intermediarios, paga por un equipo de élite listo para accionar.</p>
-
-                <h3>Paso 3: Transparencia Financiera (ROI)</h3>
-                <p>Usamos el panel financiero (Gringotts). Le mostramos al cliente que nuestra estructura cubre absolutamente todas las obligaciones laborales de ley (IESS, Décimos). Esto proyecta a Puerto Naranja como una empresa seria, blindando legalmente a la marca del cliente contra cualquier contingencia externa.</p>
-
-                <h3>Paso 4: El Compromiso de Resultados</h3>
-                <p>Cerramos la presentación con el equipo de Data & Digital. Garantizamos que nuestra "osadía creativa" no es un disparo al aire, sino que está respaldada por la minería de datos y un presupuesto de pauta de conversión optimizado (como nuestros 753 Galeones base). Creatividad explosiva, pero medida en ventas.</p>
+                <h3>Guion de Cierre (Ejemplo Práctico en Mesa)</h3>
+                <p><em>Contexto: El cliente duda de nuestra capacidad de respuesta frente a campañas que cambian de la noche a la mañana.</em></p>
+                
+                <div class="script-box">
+                    <div class="script-line">
+                        <span class="script-role">Cliente Exigente (CEO):</span>
+                        <span class="script-text">"He trabajado con agencias que hacen cosas bonitas, pero cuando la competencia lanza una promo agresiva y necesito un spot de respuesta en dos días, se ahogan en burocracia."</span>
+                    </div>
+                    <div class="script-line">
+                        <span class="script-role">Mateo (Jefe de Negocios):</span>
+                        <span class="script-text">"Lo entendemos perfectamente. Y esa es exactamente la razón por la que no cobramos como una agencia freelance. Si revisa nuestra estructura, verá que tenemos a 22 profesionales bajo un mismo techo."</span>
+                    </div>
+                    <div class="script-line">
+                        <span class="script-role">Dirección Creativa / Multimedia:</span>
+                        <span class="script-text">"Aquí no llamamos a productoras externas para ver si tienen agenda. Tenemos a nuestros directores, animadores, sonidistas y estrategas listos. Cuando el mercado exige respuesta, nosotros no agendamos reuniones para pensar; entramos al estudio, grabamos y pautamos. Le ofrecemos la madurez y la experiencia estratégica para no equivocarnos en el mensaje, combinada con la osadía y la velocidad para que su marca pegue primero."</span>
+                    </div>
+                    <div class="script-line">
+                        <span class="script-role">Nicole (Jefa de Cuentas):</span>
+                        <span class="script-text">"Y nuestro panel de Data rastreará esa agresividad en tiempo real. No le prometemos solo creatividad, le prometemos infraestructura militar a su servicio."</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Modal logic general
-        function closeAllModals() {
-            document.querySelectorAll('.modal-overlay').forEach(modal => {
-                modal.classList.remove('active');
-            });
-        }
-
-        function closeOnOutsideClick(event, modalId) {
-            if (event.target.id === modalId) {
-                closeAllModals();
-            }
-        }
-
-        function openModal(modalId) {
-            closeAllModals();
-            document.getElementById(modalId).classList.add('active');
-        }
-
-        // Modal específico para perfiles del organigrama
+        // Lógica de Modales
+        function closeAllModals() { document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active')); }
+        function closeOnOutsideClick(event, modalId) { if (event.target.id === modalId) closeAllModals(); }
+        function openModal(modalId) { closeAllModals(); document.getElementById(modalId).classList.add('active'); }
         function openRoleModal(name, role, desc, imgSrc) {
             document.getElementById('modalName').textContent = name;
             document.getElementById('modalRole').textContent = role;
             document.getElementById('modalDesc').textContent = desc;
-            const imgElement = document.getElementById('modalImg');
-            imgElement.src = imgSrc;
-            // Fallback en caso de que alguna imagen falle
-            imgElement.onerror = function() {
-                this.src = `https://ui-avatars.com/api/?name=${name.replace(' ', '+')}&background=1a1a1a&color=FF5E00`;
-            };
+            document.getElementById('modalImg').src = imgSrc;
+            document.getElementById('modalImg').onerror = function() { this.src = `https://ui-avatars.com/api/?name=${name.replace(' ', '+')}&background=1a1a1a&color=FF5E00`; };
             openModal('roleModal');
         }
-
         function toggleFinance() { document.getElementById('financePanel').classList.toggle('open'); }
 
-        // Ctrl + . Edit Mode
+        // Edición Manual
         let isEditMode = false;
         document.addEventListener('keydown', function(event) {
             if (event.ctrlKey && event.key === '.') {
@@ -437,63 +478,78 @@
             }
         });
 
-        // --- SISTEMA MONETARIO MÁGICO ---
-        // 1 Galeón = 17 Sickles | 1 Sickle = 29 Knuts
+        // Calculadora Monetaria
         function formatMagicalCurrency(decimalGaleons) {
             let isNegative = decimalGaleons < 0;
             let val = Math.abs(decimalGaleons);
-            
             let g = Math.floor(val);
             let s_decimal = (val - g) * 17;
             let s = Math.floor(s_decimal);
             let k_decimal = (s_decimal - s) * 29;
             let k = Math.round(k_decimal);
-
             if (k >= 29) { k = 0; s += 1; }
             if (s >= 17) { s = 0; g += 1; }
-
             let result = `${g} Galeones, ${s} Sickles, ${k} Knuts`;
             return isNegative ? `- ${result}` : result;
         }
 
+        // Lógica Financiera
         function calculateFinances() {
+            // Nómina
             let totalSueldos = 0;
             document.querySelectorAll('.salary').forEach(input => totalSueldos += parseFloat(input.value) || 0);
-            
             document.getElementById('totNominaMag').textContent = formatMagicalCurrency(totalSueldos);
 
+            // Cargas
             const iess = totalSueldos * 0.1215; 
             const decimos = totalSueldos * 0.1666; 
-            
+            const totalCargas = iess + decimos;
             document.getElementById('valIESS').textContent = formatMagicalCurrency(iess);
             document.getElementById('valDecimos').textContent = formatMagicalCurrency(decimos);
 
+            // Operaciones
             let totalOpex = 0;
             document.querySelectorAll('.opex').forEach(input => totalOpex += parseFloat(input.value) || 0);
-            
-            let subtotalOperaciones = iess + decimos + totalOpex;
+            let subtotalOperaciones = totalCargas + totalOpex;
             document.getElementById('totOpsMag').textContent = formatMagicalCurrency(subtotalOperaciones);
 
+            // Resumen General
             let ingresoTotal = parseFloat(document.getElementById('ingresoTotal').value) || 0;
-            let egresoTotal = totalSueldos + subtotalOperaciones;
+            let egresoTotal = totalSueldos + subtotalOperaciones; 
             let flujoCaja = ingresoTotal - egresoTotal;
             let margen = (flujoCaja / ingresoTotal) * 100;
 
             document.getElementById('egresoTotal').textContent = formatMagicalCurrency(egresoTotal);
             document.getElementById('flujoCaja').textContent = formatMagicalCurrency(flujoCaja);
-            
             document.getElementById('flujoCaja').style.color = flujoCaja >= 0 ? '#33ff77' : '#ff3333';
             document.getElementById('margenPorcentaje').textContent = (isNaN(margen) || !isFinite(margen) ? "0.00" : margen.toFixed(2)) + "%";
 
+            // Alertas
             const warning = document.getElementById('warningText');
             if(flujoCaja < 0) {
                 warning.style.color = '#ff3333';
-                warning.textContent = "ALERTA FINANCIERA: Estructura en pérdida. Ajuste presupuestos con Ctrl + .";
+                warning.textContent = "ALERTA FINANCIERA: Estructura en pérdida.";
             } else if (margen >= 65) {
                 warning.style.color = '#33ff77';
                 warning.textContent = "ESTADO ÓPTIMO: El margen de rentabilidad supera el objetivo del 65%.";
             } else {
-                warning.textContent = "";
+                warning.style.color = '#ffd700';
+                warning.textContent = "ALERTA DE RENTABILIDAD: El margen está por debajo del 65% exigido.";
+            }
+
+            // Actualización Gráfica de Distribución
+            if(egresoTotal > 0) {
+                let pctNomina = (totalSueldos / egresoTotal) * 100;
+                let pctCargas = (totalCargas / egresoTotal) * 100;
+                let pctOpex = (totalOpex / egresoTotal) * 100;
+
+                document.getElementById('barNomina').style.width = pctNomina + '%';
+                document.getElementById('barCargas').style.width = pctCargas + '%';
+                document.getElementById('barOpex').style.width = pctOpex + '%';
+
+                document.getElementById('pctNomina').textContent = pctNomina.toFixed(1);
+                document.getElementById('pctCargas').textContent = pctCargas.toFixed(1);
+                document.getElementById('pctOpex').textContent = pctOpex.toFixed(1);
             }
         }
 
