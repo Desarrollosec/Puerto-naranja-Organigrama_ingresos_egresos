@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memo MG 001 - Puerto Naranja (Expansión)</title>
+    <style>
+        :root {
+            --bg-color: #0d0d0d;
+            --surface-color: #1a1a1a;
+            --neon-orange: #FF5E00;
+            --neon-glow: 0 0 10px rgba(255, 94, 0, 0.4), 0 0 20px rgba(255, 94, 0, 0.2);
+            --text-main: #f2f2f2;
+            --text-muted: #a0a0a0;
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+
+        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; padding: 2rem; }
+
+        header { text-align: center; margin-bottom: 3rem; border-bottom: 2px solid var(--neon-orange); padding-bottom: 1.5rem; }
+        
+        .logo-img { max-width: 400px; height: auto; margin-bottom: 0.5rem; }
+        
+        h2 { color: var(--neon-orange); margin-bottom: 1rem; font-size: 1.5rem; }
+
+        .section-container { background: var(--surface-color); border-radius: var(--border-radius); padding: 2rem; margin-bottom: 2rem; border: 1px solid rgba(255, 94, 0, 0.2); }
+
+        /* --- Organigrama Masivo (CSS Grid / Flex / Árbol Mejorado) --- */
+        .org-wrapper { overflow-x: auto; padding-bottom: 2rem; }
+        
+        .tree-level { display: flex; justify-content: center; gap: 2rem; position: relative; padding-top: 2rem; margin-top: 1rem; }
+        .tree-level::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 2px; height: 2rem; background-color: var(--neon-orange); }
+        .tree-level.root::before { display: none; }
+        .tree-level.root { padding-top: 0; margin-top: 0; }
+
+        /* Contenedor de ramas sin borde superior general para evitar excedentes */
+        .tree-branch { 
+            position: relative; 
+            display: flex; 
+            justify-content: center; 
+            padding-top: 0; 
+            margin-top: 2rem; 
+        }
+        
+        /* Tallo principal que baja hacia la rama */
+        .tree-branch::before { 
+            content: ''; 
+            position: absolute; 
+            top: -2rem; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            width: 2px; 
+            height: 2rem; 
+            background-color: var(--neon-orange); 
+        }
+        
+        /* Items individuales de la rama */
+        .branch-item { 
+            position: relative; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center;
+            padding: 2rem 1rem 0 1rem; /* Espacio superior para el tallo pequeño */
+        }
+        
+        /* Línea horizontal que conecta a los hermanos (se ajusta por item) */
+        .branch-item::before { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 2px; 
+            background-color: var(--neon-orange); 
+        }
+        
+        /* Tallo pequeño que baja desde la línea horizontal hacia la tarjeta */
+        .branch-item::after { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            width: 2px; 
+            height: 2rem; 
+            background-color: var(--neon-orange); 
+        }
+        
+        /* MÁGIA CSS: Eliminar excedente izquierdo del primer elemento */
+        .branch-item:first-child::before {
+            left: 50%;
+            width: 50%;
+        }
+        
+        /* MÁGIA CSS: Eliminar excedente derecho del último elemento */
+        .branch-item:last-child::before {
+            width: 50%;
+        }
+        
+        /* Si solo hay un elemento, no necesita línea horizontal */
+        .branch-item:only-child::before {
+            display: none;
+        }
+
+        /* Tarjetas */
+        .org-card { background: var(--bg-color); border: 1px solid rgba(255, 94, 0, 0.3); border-radius: var(--border-radius); padding: 1.5rem; text-align: center; cursor: pointer; transition: var(--transition); width: 220px; z-index: 2; position: relative; }
+        .org-card:hover { border-color: var(--neon-orange); box-shadow: var(--neon-glow); transform: translateY(-5px); }
+        .org-card h3 { font-size: 1.1rem; margin-bottom: 0.3rem; }
+        .org-card p { color: var(--text-muted); font-size: 0.85rem; font-weight: bold; }
+        .org-card span { display: block; font-size: 0.75rem; color: #666; margin-top: 0.5rem; }
+
+        /* Departamentos Verticales (Staff debajo de directores) */
+        .dept-column { display: flex; flex-direction: column; gap: 1rem; align-items: center; margin-top: 1rem; position: relative; padding-top: 1rem; }
+        .dept-column::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 2px; height: 100%; background-color: rgba(255, 94, 0, 0.3); z-index: 0; }
+
+        /* Modal */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: var(--transition); z-index: 1000; }
+        .modal-overlay.active { opacity: 1; pointer-events: all; }
+        .modal-content { background: var(--surface-color); padding: 2.5rem; border-radius: var(--border-radius); border: 1px solid var(--neon-orange); box-shadow: var(--neon-glow); max-width: 600px; width: 90%; position: relative; }
+        .close-btn { position: absolute; top: 15px; right: 20px; color: var(--neon-orange); font-size: 1.5rem; cursor: pointer; background: none; border: none; }
+        
+        .modal-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; border-bottom: 1px dashed rgba(255, 94, 0, 0.3); padding-bottom: 1.5rem; }
+        .modal-img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 2px solid var(--neon-orange); background: #1a1a1a; }
+        #modalName { color: var(--neon-orange); font-size: 1.8rem; }
+        #modalRole { color: var(--text-muted); font-size: 1rem; }
+        #modalDesc { font-size: 1.05rem; line-height: 1.7; }
+
+        /* Finanzas */
+        .btn-toggle { width: 100%; background: transparent; color: var(--neon-orange); border: 2px solid var(--neon-orange); padding: 1rem; font-size: 1.2rem; font-weight: bold; border-radius: var(--border-radius); cursor: pointer; text-transform: uppercase; }
+        .btn-toggle:hover { background: var(--neon-orange); color: var(--bg-color); box-shadow: var(--neon-glow); }
+        .finance-panel { max-height: 0; overflow: hidden; transition: max-height 0.8s ease-out; }
+        .finance-panel.open { max-height: 5000px; padding-top: 1rem; }
+        
+        .finance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem; }
+        .finance-box { background: var(--bg-color); padding: 1.5rem; border-radius: var(--border-radius); border: 1px solid #333; }
+        .finance-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; padding-bottom: 0.3rem; border-bottom: 1px dashed #222; font-size: 0.9rem; }
+        .finance-row.total { border-bottom: none; border-top: 2px solid var(--neon-orange); padding-top: 1rem; font-weight: bold; font-size: 1.1rem; color: var(--neon-orange); }
+        
+        input[type="number"] { background: transparent; border: 1px solid transparent; color: var(--text-main); text-align: right; font-family: monospace; font-size: 1rem; width: 80px; padding: 2px; transition: var(--transition); }
+        input.edit-mode { border: 1px solid var(--neon-orange); background: rgba(255, 94, 0, 0.1); outline: none; }
+
+        .magic-currency { font-family: 'Georgia', serif; font-style: italic; color: #ffd700; font-size: 0.95rem; text-align: right; }
+
+        .dashboard-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem; background: var(--bg-color); padding: 1.5rem; border-radius: var(--border-radius); border: 1px solid var(--neon-orange); }
+        .stat-item { text-align: center; }
+        .stat-value { display: block; font-size: 1.5rem; color: var(--neon-orange); font-weight: bold; margin-bottom: 0.5rem; }
+        
+        .side-staff-box { margin-top: 3rem; padding: 1.5rem; border: 1px dashed var(--neon-orange); border-radius: var(--border-radius); text-align: center; }
+        .side-staff-box h3 { margin-bottom: 1rem; color: var(--neon-orange); }
+        .side-staff-grid { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="imgs/logo.png" alt="Logo Agencia Puerto Naranja" class="logo-img">
+        <p>Memo MG 001 - Expansión y Reestructuración Operativa</p>
+    </header>
+
+    <section class="section-container">
+        <h2>Estructura Organizacional (23 Profesionales)</h2>
+        
+        <div class="org-wrapper">
+            <!-- Nivel 1: Dirección -->
+            <div class="tree-level root">
+                <div class="org-card" onclick="openModal('Jorge Yepez', 'CMO y Director Creativo', 'Dirección estratégica de la agencia, conceptualización de alto nivel y aprobación final de todas las campañas.', 'imgs/jorge.jpg')">
+                    <h3>Jorge Yepez</h3><p>CMO / Dir. Creativo</p>
+                </div>
+                <div class="org-card" onclick="openModal('Mateo Vargas', 'Jefe de Negocios', 'Búsqueda de nuevos clientes, alianzas estratégicas, proyecciones de rentabilidad y expansión comercial.', 'https://randomuser.me/api/portraits/men/32.jpg')">
+                    <h3>Mateo Vargas</h3><p>Jefe de Negocios</p>
+                </div>
+            </div>
+
+            <!-- Nivel 2: Cuentas -->
+            <div class="tree-level">
+                <div class="org-card" onclick="openModal('Nicole Pinilla', 'Jefa de Cuentas', 'Líder del equipo de ejecutivos. Supervisa el flujo de comunicación y aprueba presupuestos de las marcas clave.', 'imgs/nicole.jpg')">
+                    <h3>Nicole Pinilla</h3><p>Jefa de Cuentas</p>
+                </div>
+            </div>
+
+            <!-- Nivel 3: Ejecutivos -->
+            <div class="tree-branch">
+                <div class="branch-item">
+                    <div class="org-card" onclick="openModal('Sofía Castro', 'Ejecutiva de Cuentas', 'Nexo diario con las marcas, seguimiento de KPIs y recepción de briefs.', 'https://randomuser.me/api/portraits/women/44.jpg')">
+                        <h3>Sofía Castro</h3><p>Ejecutiva Cuentas</p>
+                    </div>
+                </div>
+                <div class="branch-item">
+                    <div class="org-card" onclick="openModal('Luis Torres', 'Ejecutivo de Cuentas', 'Nexo diario con las marcas, seguimiento de KPIs y recepción de briefs.', 'https://randomuser.me/api/portraits/men/45.jpg')">
+                        <h3>Luis Torres</h3><p>Ejecutivo Cuentas</p>
+                    </div>
+                </div>
+                <div class="branch-item">
+                    <div class="org-card" onclick="openModal('Ana Ruiz', 'Ejecutiva de Cuentas', 'Nexo diario con las marcas, seguimiento de KPIs y recepción de briefs.', 'https://randomuser.me/api/portraits/women/68.jpg')">
+                        <h3>Ana Ruiz</h3><p>Ejecutiva Cuentas</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nivel 4 y 5: Departamentos Operativos -->
+            <div class="tree-branch" style="align-items: flex-start;">
+                
+                <!-- RRPP -->
+                <div class="branch-item">
+                    <div class="org-card" onclick="openModal('MariaJose Estrella', 'Relaciones Públicas', 'Estrategia de comunicación corporativa, manejo de crisis y relación con medios y stakeholders.', 'imgs/mariajose.jpg')">
+                        <h3>MariaJose Estrella</h3><p>Jefa RRPP</p>
+                    </div>
+                    <div class="dept-column">
+                        <div class="org-card" onclick="openModal('Clara Vega', 'Asistente RRPP', 'Monitoreo de medios, notas de prensa y gestión de base de datos.', 'https://randomuser.me/api/portraits/women/22.jpg')">
+                            <h3>Clara Vega</h3><span>Asistente</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Multimedia y Producción -->
+                <div class="branch-item">
+                    <div class="org-card" onclick="openModal('Carlos Balseca', 'Director Multimedia', 'Jefe de producción audiovisual. Lidera al equipo técnico en rodajes, postproducción y entrega final.', 'imgs/carlos.jpg')">
+                        <h3>Carlos Balseca</h3><p>Director Multimedia</p>
+                    </div>
+                    <div class="dept-column">
+                        <div class="org-card" onclick="openModal('David M.', 'Animador 2D/3D', 'Motion graphics, modelado y VFX.', 'https://randomuser.me/api/portraits/men/22.jpg')"><h3>David M.</h3><span>Animador</span></div>
+                        <div class="org-card" onclick="openModal('Juan S.', 'Filmmaker', 'Operador de cámara y piloto de drones.', 'https://randomuser.me/api/portraits/men/23.jpg')"><h3>Juan S.</h3><span>Filmmaker</span></div>
+                        <div class="org-card" onclick="openModal('Pedro L.', 'Editor Senior', 'Montaje, ritmo y Color Grading.', 'https://randomuser.me/api/portraits/men/24.jpg')"><h3>Pedro L.</h3><span>Editor Senior</span></div>
+                        <div class="org-card" onclick="openModal('Lucas G.', 'Gaffer', 'Esquemas de iluminación y eléctrica.', 'https://randomuser.me/api/portraits/men/25.jpg')"><h3>Lucas G.</h3><span>Iluminación</span></div>
+                        <div class="org-card" onclick="openModal('Tomas R.', 'Sonidista', 'Captura de audio, foley y mezcla.', 'https://randomuser.me/api/portraits/men/26.jpg')"><h3>Tomas R.</h3><span>Sonido</span></div>
+                        <div class="org-card" onclick="openModal('Simon P.', 'Dir. Fotografía', 'Estética visual y encuadres.', 'https://randomuser.me/api/portraits/men/27.jpg')"><h3>Simon P.</h3><span>DoP</span></div>
+                    </div>
+                </div>
+
+                <!-- Arte -->
+                <div class="branch-item">
+                    <div class="org-card" onclick="openModal('Andres Rosero', 'Director de Arte', 'Asegura la coherencia visual, diseña key visuals y guía el estilo gráfico de las campañas.', 'imgs/andres.jpg')">
+                        <h3>Andres Rosero</h3><p>Director de Arte</p>
+                    </div>
+                    <div class="dept-column">
+                        <div class="org-card" onclick="openModal('Laura Q.', 'Diseñadora', 'Adaptación de artes y diagramación.', 'https://randomuser.me/api/portraits/women/33.jpg')"><h3>Laura Q.</h3><span>Diseño Gráfico</span></div>
+                        <div class="org-card" onclick="openModal('Camila T.', 'Diseñadora UI', 'Interfaces web y assets digitales.', 'https://randomuser.me/api/portraits/women/34.jpg')"><h3>Camila T.</h3><span>Diseño Digital</span></div>
+                    </div>
+                </div>
+
+                <!-- Data & Digital -->
+                <div class="branch-item">
+                    <div class="org-card" onclick="openModal('Dayanna Lopez', 'Data & Mkt Digital', 'Estrategia de performance, análisis de pauta, SEO y levantamiento de insights métricos.', 'imgs/dayanna.jpg')">
+                        <h3>Dayanna Lopez</h3><p>Dir. Digital & Data</p>
+                    </div>
+                    <div class="dept-column">
+                        <div class="org-card" onclick="openModal('Kevin W.', 'Asistente Data', 'Minería de datos y dashboards en Looker Studio.', 'https://randomuser.me/api/portraits/men/35.jpg')">
+                            <h3>Kevin W.</h3><span>Asistente Digital</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Staff de Apoyo -->
+            <div class="side-staff-box">
+                <h3>Departamentos de Apoyo Transversal</h3>
+                <div class="side-staff-grid">
+                    <div class="org-card" onclick="openModal('Valeria Ríos', 'Contabilidad', 'Gestión de flujo de caja, pago a proveedores, facturación y cálculo de nómina.', 'https://randomuser.me/api/portraits/women/41.jpg')">
+                        <h3>Valeria Ríos</h3><p>Contabilidad</p>
+                    </div>
+                    <div class="org-card" onclick="openModal('Roberto Paz', 'Talento Humano', 'Clima laboral, reclutamiento, onboarding y gestión de contratos.', 'https://randomuser.me/api/portraits/men/41.jpg')">
+                        <h3>Roberto Paz</h3><p>Talento Humano</p>
+                    </div>
+                    <div class="org-card" onclick="openModal('Don Julio', 'Servicios Generales', 'Mantenimiento del estudio, proveeduría de suministros y logística física.', 'https://randomuser.me/api/portraits/men/66.jpg')">
+                        <h3>Don Julio</h3><p>Servicios Generales</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ESTADO DE RESULTADOS MAGICO -->
+    <section class="section-container">
+        <button class="btn-toggle" onclick="toggleFinance()">Bóveda de Gringotts (Presupuestos)</button>
+        
+        <div class="finance-panel" id="financePanel">
+            <p style="margin-bottom: 1rem; color: var(--text-muted); font-size: 0.9rem;">
+                <em>* Valores ingresados en Galeones (Aterrizados a mercado EC: $6.64 = 1 Galeón). Presiona <strong>Ctrl + .</strong> para habilitar edición.</em>
+            </p>
+            
+            <div class="finance-grid">
+                <!-- Nómina -->
+                <div class="finance-box">
+                    <h3 style="color: var(--neon-orange); margin-bottom: 1rem;">Nómina (23 Empleados)</h3>
+                    <div class="finance-row"><span>Dir (Jorge+Mateo) [$3500]</span> <span><input type="number" class="calc-input salary" value="527" readonly> G</span></div>
+                    <div class="finance-row"><span>Cuentas (Jefa+3) [$3600]</span> <span><input type="number" class="calc-input salary" value="542" readonly> G</span></div>
+                    <div class="finance-row"><span>RRPP (Majo+1) [$1700]</span> <span><input type="number" class="calc-input salary" value="256" readonly> G</span></div>
+                    <div class="finance-row"><span>Multimedia (Dir+6) [$6200]</span> <span><input type="number" class="calc-input salary" value="934" readonly> G</span></div>
+                    <div class="finance-row"><span>Arte (Andres+2) [$2900]</span> <span><input type="number" class="calc-input salary" value="437" readonly> G</span></div>
+                    <div class="finance-row"><span>Data (Dayanna+1) [$2000]</span> <span><input type="number" class="calc-input salary" value="301" readonly> G</span></div>
+                    <div class="finance-row"><span>Staff (Cont/RRHH/SG) [$2100]</span> <span><input type="number" class="calc-input salary" value="316" readonly> G</span></div>
+                    <div class="finance-row total">
+                        <span>Subtotal Nómina</span> 
+                        <span id="totNominaDec" style="display:none;"></span>
+                        <div class="magic-currency" id="totNominaMag"></div>
+                    </div>
+                </div>
+
+                <!-- Operaciones -->
+                <div class="finance-box">
+                    <h3 style="color: var(--neon-orange); margin-bottom: 1rem;">Operaciones y Cargas</h3>
+                    <div class="finance-row"><span>IESS (12.15%)</span> <span class="magic-currency" id="valIESS"></span></div>
+                    <div class="finance-row"><span>Décimos (16.66%)</span> <span class="magic-currency" id="valDecimos"></span></div>
+                    <div class="finance-row"><span>Pauta Propia [$5000]</span> <span><input type="number" class="calc-input opex" value="753" readonly> G</span></div>
+                    <div class="finance-row"><span>Arriendo Estudio [$1328]</span> <span><input type="number" class="calc-input opex" value="200" readonly> G</span></div>
+                    <div class="finance-row"><span>Agua/Luz x23 [$500]</span> <span><input type="number" class="calc-input opex" value="75" readonly> G</span></div>
+                    <div class="finance-row"><span>Internet Fibra [$166]</span> <span><input type="number" class="calc-input opex" value="25" readonly> G</span></div>
+                    <div class="finance-row"><span>Mantenimiento [$332]</span> <span><input type="number" class="calc-input opex" value="50" readonly> G</span></div>
+                    <div class="finance-row"><span>Suministros [$265]</span> <span><input type="number" class="calc-input opex" value="40" readonly> G</span></div>
+                    <div class="finance-row"><span>Software y Cloud [$398]</span> <span><input type="number" class="calc-input opex" value="60" readonly> G</span></div>
+                    <div class="finance-row total">
+                        <span>Total Operaciones</span> 
+                        <div class="magic-currency" id="totOpsMag"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resumen Financiero -->
+            <div class="dashboard-stats">
+                <div class="stat-item">
+                    <span>Facturación (Galeones)</span>
+                    <span class="stat-value"><input type="number" id="ingresoTotal" class="calc-input" value="7000" readonly style="font-size: 1.5rem; width:120px; font-weight:bold; color:white;"></span>
+                </div>
+                <div class="stat-item">
+                    <span>Egresos Totales</span>
+                    <span class="stat-value magic-currency" id="egresoTotal" style="color: #ff3333; font-size:1.2rem; margin-top:10px;"></span>
+                </div>
+                <div class="stat-item">
+                    <span>Flujo de Caja Libre</span>
+                    <span class="stat-value magic-currency" id="flujoCaja" style="font-size:1.2rem; margin-top:10px;"></span>
+                </div>
+                <div class="stat-item">
+                    <span>Margen</span>
+                    <span class="stat-value" id="margenPorcentaje" style="color: var(--neon-orange);"></span>
+                </div>
+            </div>
+            <p style="text-align:center; color: #ff3333; margin-top: 1rem; font-size: 0.85rem;" id="warningText"></p>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="roleModal" onclick="closeOnOutsideClick(event)">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">×</button>
+            <div class="modal-header">
+                <img id="modalImg" src="" alt="Foto" class="modal-img">
+                <div>
+                    <h2 id="modalName">Nombre</h2>
+                    <h3 id="modalRole">Cargo</h3>
+                </div>
+            </div>
+            <p id="modalDesc">Descripción.</p>
+        </div>
+    </div>
+
+    <script>
+        // Modal logic
+        function openModal(name, role, desc, imgSrc) {
+            document.getElementById('modalName').textContent = name;
+            document.getElementById('modalRole').textContent = role;
+            document.getElementById('modalDesc').textContent = desc;
+            const imgElement = document.getElementById('modalImg');
+            imgElement.src = imgSrc;
+            // Fallback en caso de que alguna imagen falle
+            imgElement.onerror = function() {
+                this.src = `https://ui-avatars.com/api/?name=${name.replace(' ', '+')}&background=1a1a1a&color=FF5E00`;
+            };
+            document.getElementById('roleModal').classList.add('active');
+        }
+        function closeModal() { document.getElementById('roleModal').classList.remove('active'); }
+        function closeOnOutsideClick(event) { if (event.target.id === 'roleModal') closeModal(); }
+        function toggleFinance() { document.getElementById('financePanel').classList.toggle('open'); }
+
+        // Ctrl + . Edit Mode
+        let isEditMode = false;
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && event.key === '.') {
+                event.preventDefault();
+                isEditMode = !isEditMode;
+                document.querySelectorAll('.calc-input').forEach(input => {
+                    if(isEditMode) { input.removeAttribute('readonly'); input.classList.add('edit-mode'); } 
+                    else { input.setAttribute('readonly', true); input.classList.remove('edit-mode'); }
+                });
+            }
+        });
+
+        // --- SISTEMA MONETARIO MÁGICO ---
+        // 1 Galeón = 17 Sickles | 1 Sickle = 29 Knuts
+        function formatMagicalCurrency(decimalGaleons) {
+            let isNegative = decimalGaleons < 0;
+            let val = Math.abs(decimalGaleons);
+            
+            let g = Math.floor(val);
+            let s_decimal = (val - g) * 17;
+            let s = Math.floor(s_decimal);
+            let k_decimal = (s_decimal - s) * 29;
+            let k = Math.round(k_decimal);
+
+            if (k >= 29) { k = 0; s += 1; }
+            if (s >= 17) { s = 0; g += 1; }
+
+            let result = `${g} Galeones, ${s} Sickles, ${k} Knuts`;
+            return isNegative ? `- ${result}` : result;
+        }
+
+        function calculateFinances() {
+            let totalSueldos = 0;
+            document.querySelectorAll('.salary').forEach(input => totalSueldos += parseFloat(input.value) || 0);
+            
+            document.getElementById('totNominaMag').textContent = formatMagicalCurrency(totalSueldos);
+
+            const iess = totalSueldos * 0.1215; 
+            const decimos = totalSueldos * 0.1666; 
+            
+            document.getElementById('valIESS').textContent = formatMagicalCurrency(iess);
+            document.getElementById('valDecimos').textContent = formatMagicalCurrency(decimos);
+
+            let totalOpex = 0;
+            document.querySelectorAll('.opex').forEach(input => totalOpex += parseFloat(input.value) || 0);
+            
+            let subtotalOperaciones = iess + decimos + totalOpex;
+            document.getElementById('totOpsMag').textContent = formatMagicalCurrency(subtotalOperaciones);
+
+            let ingresoTotal = parseFloat(document.getElementById('ingresoTotal').value) || 0;
+            let egresoTotal = totalSueldos + subtotalOperaciones;
+            let flujoCaja = ingresoTotal - egresoTotal;
+            let margen = (flujoCaja / ingresoTotal) * 100;
+
+            document.getElementById('egresoTotal').textContent = formatMagicalCurrency(egresoTotal);
+            document.getElementById('flujoCaja').textContent = formatMagicalCurrency(flujoCaja);
+            
+            document.getElementById('flujoCaja').style.color = flujoCaja >= 0 ? '#33ff77' : '#ff3333';
+            document.getElementById('margenPorcentaje').textContent = (isNaN(margen) || !isFinite(margen) ? "0.00" : margen.toFixed(2)) + "%";
+
+            const warning = document.getElementById('warningText');
+            if(flujoCaja < 0) {
+                warning.textContent = "ALERTA FINANCIERA: Estructura en pérdida. Ajuste presupuestos con Ctrl + .";
+            } else {
+                warning.textContent = "";
+            }
+        }
+
+        document.querySelectorAll('.calc-input').forEach(input => {
+            input.addEventListener('input', calculateFinances);
+        });
+
+        calculateFinances();
+    </script>
+</body>
+</html>
