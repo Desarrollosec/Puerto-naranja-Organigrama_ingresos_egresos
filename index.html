@@ -65,76 +65,84 @@
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: var(--transition); z-index: 1000; overflow-y: auto; padding: 2rem; }
         .modal-overlay.active { opacity: 1; pointer-events: all; }
         .modal-content { background: var(--surface-color); padding: 2.5rem; border-radius: var(--border-radius); border: 1px solid var(--neon-orange); box-shadow: var(--neon-glow); max-width: 800px; width: 100%; position: relative; max-height: 90vh; overflow-y: auto; }
-        
-        /* Modal - Cabecera Role */
         .close-btn { position: absolute; top: 15px; right: 20px; color: var(--neon-orange); font-size: 2rem; cursor: pointer; background: none; border: none; line-height: 1; }
         .modal-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; border-bottom: 1px dashed rgba(255, 94, 0, 0.3); padding-bottom: 1.5rem; }
         .modal-img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 2px solid var(--neon-orange); background: #1a1a1a; }
         #modalName { color: var(--neon-orange); font-size: 1.8rem; }
         #modalRole { color: var(--text-muted); font-size: 1rem; }
-        #modalDesc { font-size: 1.05rem; line-height: 1.7; }
-
-        /* Modal - Texto Largo Mejorado */
-        .modal-title { color: var(--neon-orange); font-size: 1.8rem; margin-bottom: 0.5rem; border-bottom: 2px solid var(--neon-orange); padding-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .modal-title { color: var(--neon-orange); font-size: 1.8rem; margin-bottom: 0.5rem; border-bottom: 2px solid var(--neon-orange); padding-bottom: 0.5rem; text-transform: uppercase; }
         .modal-subtitle { color: #888; font-style: italic; margin-bottom: 1.5rem; font-size: 1.1rem; }
-        .modal-text-content h3 { color: #fff; margin-top: 1.8rem; margin-bottom: 0.8rem; font-size: 1.25rem; display: flex; align-items: center; gap: 0.5rem; background: rgba(255, 94, 0, 0.1); padding: 0.5rem 1rem; border-left: 3px solid var(--neon-orange); border-radius: 0 4px 4px 0; }
+        .modal-text-content h3 { color: #fff; margin-top: 1.8rem; margin-bottom: 0.8rem; font-size: 1.25rem; display: flex; align-items: center; gap: 0.5rem; background: rgba(255, 94, 0, 0.1); padding: 0.5rem 1rem; border-left: 3px solid var(--neon-orange); }
         .modal-text-content p { font-size: 1rem; line-height: 1.6; color: #ccc; margin-bottom: 1rem; }
         .modal-text-content ul { margin-left: 2rem; margin-bottom: 1.5rem; color: #ccc; }
-        .modal-text-content li { margin-bottom: 0.5rem; line-height: 1.5; }
-        .modal-text-content strong { color: var(--neon-orange); }
+        .modal-text-content li { margin-bottom: 0.5rem; }
 
-        /* Bloque de Guion para el Pitch */
-        .script-box { background: #111; border: 1px solid #333; border-radius: 8px; padding: 1.5rem; margin-top: 1rem; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); }
+        .script-box { background: #111; border: 1px solid #333; border-radius: 8px; padding: 1.5rem; margin-top: 1rem; }
         .script-line { margin-bottom: 1rem; display: flex; flex-direction: column; }
-        .script-role { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--neon-orange); margin-bottom: 0.2rem; font-weight: bold; }
+        .script-role { font-size: 0.85rem; text-transform: uppercase; color: var(--neon-orange); font-weight: bold; }
         .script-text { font-size: 1.05rem; color: #eaeaea; font-style: italic; border-left: 2px solid #333; padding-left: 1rem; margin-left: 0.5rem; }
 
-        /* Finanzas */
-        .btn-toggle { width: 100%; background: transparent; color: var(--neon-orange); border: 2px solid var(--neon-orange); padding: 1rem; font-size: 1.2rem; font-weight: bold; border-radius: var(--border-radius); cursor: pointer; text-transform: uppercase; }
+        /* Banner Conversion */
+        .conversion-banner { background: rgba(255, 94, 0, 0.15); border: 1px solid var(--neon-orange); padding: 1rem; text-align: center; border-radius: var(--border-radius); margin-bottom: 2rem; color: #fff; font-size: 1.1rem; }
+        .conversion-banner strong { color: var(--neon-orange); font-size: 1.2rem; }
+
+        /* Finanzas y Calculadora */
+        .btn-toggle { width: 100%; background: transparent; color: var(--neon-orange); border: 2px solid var(--neon-orange); padding: 1rem; font-size: 1.2rem; font-weight: bold; border-radius: var(--border-radius); cursor: pointer; text-transform: uppercase; margin-bottom: 1rem; }
         .btn-toggle:hover { background: var(--neon-orange); color: var(--bg-color); box-shadow: var(--neon-glow); }
         .finance-panel { max-height: 0; overflow: hidden; transition: max-height 0.8s ease-out; }
-        .finance-panel.open { max-height: 5000px; padding-top: 1rem; }
+        .finance-panel.open { max-height: 6000px; padding-top: 1rem; }
         
-        .finance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem; }
+        .dashboard-layout { display: grid; grid-template-columns: 2.5fr 1fr; gap: 2rem; }
+        
+        .finance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
         .finance-box { background: var(--bg-color); padding: 1.5rem; border-radius: var(--border-radius); border: 1px solid #333; }
+        .finance-box.taxes-box { border-color: #ffd700; background: rgba(255, 215, 0, 0.05); }
         .finance-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; padding-bottom: 0.3rem; border-bottom: 1px dashed #222; font-size: 0.9rem; }
         .finance-row.total { border-bottom: none; border-top: 2px solid var(--neon-orange); padding-top: 1rem; font-weight: bold; font-size: 1.1rem; color: var(--neon-orange); }
         
         input[type="number"] { background: transparent; border: 1px solid transparent; color: var(--text-main); text-align: right; font-family: monospace; font-size: 1rem; width: 80px; padding: 2px; transition: var(--transition); }
         input.edit-mode { border: 1px solid var(--neon-orange); background: rgba(255, 94, 0, 0.1); outline: none; }
-
         .magic-currency { font-family: 'Georgia', serif; font-style: italic; color: #ffd700; font-size: 0.95rem; text-align: right; }
+
+        /* Calculadora UI */
+        .calculator-widget { background: var(--bg-color); border: 1px solid var(--neon-orange); border-radius: var(--border-radius); padding: 1.5rem; box-shadow: var(--neon-glow); display: flex; flex-direction: column; align-self: start; position: sticky; top: 2rem; }
+        .calculator-widget h3 { color: var(--neon-orange); font-size: 1.1rem; text-align: center; margin-bottom: 1rem; }
+        .calc-display { background: #111; border: 1px solid #333; color: #fff; text-align: right; font-size: 1.5rem; padding: 0.8rem; border-radius: 6px; margin-bottom: 1rem; font-family: monospace; width: 100%; overflow-x: auto; }
+        .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+        .calc-btn { background: #222; border: 1px solid #444; color: #fff; padding: 0.8rem 0; font-size: 1.2rem; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
+        .calc-btn:hover { background: #333; border-color: var(--neon-orange); }
+        .calc-btn.op { background: rgba(255, 94, 0, 0.2); color: var(--neon-orange); border-color: rgba(255, 94, 0, 0.5); }
+        .calc-btn.op:hover { background: var(--neon-orange); color: #000; }
+        .calc-btn.eq { background: var(--neon-orange); color: #000; font-weight: bold; grid-column: span 2; }
+        .calc-btn.clear { background: #ff3333; color: #fff; font-weight: bold; border-color: #ff3333; }
 
         .dashboard-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem; background: var(--bg-color); padding: 1.5rem; border-radius: var(--border-radius); border: 1px solid var(--neon-orange); }
         .stat-item { text-align: center; }
         .stat-value { display: block; font-size: 1.5rem; color: var(--neon-orange); font-weight: bold; margin-bottom: 0.5rem; }
 
-        /* Gráfico de Distribución */
+        /* Gráfico */
         .chart-wrapper { margin-top: 2rem; padding: 1.5rem; background: var(--bg-color); border: 1px solid #333; border-radius: var(--border-radius); }
-        .chart-title { text-align: center; margin-bottom: 1rem; color: var(--neon-orange); font-size: 1.1rem; }
         .expense-chart { display: flex; height: 35px; border-radius: 6px; overflow: hidden; background: #222; width: 100%; box-shadow: inset 0 2px 5px rgba(0,0,0,0.5); }
-        .bar-segment { height: 100%; transition: width 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; color: #fff; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
+        .bar-segment { height: 100%; transition: width 0.6s ease; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; color: #fff; }
         .segment-nomina { background: linear-gradient(90deg, #FF5E00, #ff8c42); }
-        .segment-cargas { background: linear-gradient(90deg, #ffd700, #ffea75); color: #333; text-shadow: none; }
+        .segment-cargas { background: linear-gradient(90deg, #ffd700, #ffea75); color: #333; }
         .segment-opex { background: linear-gradient(90deg, #00bcd4, #4dd0e1); }
         .chart-legend { display: flex; justify-content: center; gap: 2rem; margin-top: 1rem; font-size: 0.9rem; flex-wrap: wrap; }
         .legend-item { display: flex; align-items: center; gap: 0.5rem; }
         .dot { width: 12px; height: 12px; border-radius: 50%; }
 
-        .side-staff-box { margin-top: 3rem; padding: 1.5rem; border: 1px dashed var(--neon-orange); border-radius: var(--border-radius); text-align: center; }
-        .side-staff-box h3 { margin-bottom: 1rem; color: var(--neon-orange); }
-        .side-staff-grid { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
+            .dashboard-layout { grid-template-columns: 1fr; }
             .finance-grid { grid-template-columns: 1fr; }
-            .action-buttons { flex-direction: column; }
+            .calculator-widget { position: relative; top: 0; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <img src="imgs/logo.png" alt="Logo Agencia Puerto Naranja" class="logo-img">
+        <img src="imgs/logo.png" alt="Logo Agencia Puerto Naranja" class="logo-img" onerror="this.style.display='none'">
         <p>Memo MG 001 - Expansión y Reestructuración Operativa</p>
     </header>
 
@@ -162,94 +170,57 @@
             <!-- Nivel 3: Ejecutivos -->
             <div class="tree-branch">
                 <div class="branch-item">
-                    <div class="org-card" onclick="openRoleModal('Sofía Castro', 'Ejecutiva de Cuentas', 'Nexo diario con las marcas, seguimiento de KPIs y recepción de briefs.', 'https://randomuser.me/api/portraits/women/44.jpg')">
-                        <h3>Sofía Castro</h3><p>Ejecutiva Cuentas</p>
-                    </div>
+                    <div class="org-card" onclick="openRoleModal('Sofía Castro', 'Ejecutiva de Cuentas', 'Nexo diario.', 'https://randomuser.me/api/portraits/women/44.jpg')"><h3>Sofía Castro</h3><p>Ejecutiva Cuentas</p></div>
                 </div>
                 <div class="branch-item">
-                    <div class="org-card" onclick="openRoleModal('Luis Torres', 'Ejecutivo de Cuentas', 'Nexo diario con las marcas, seguimiento de KPIs y recepción de briefs.', 'https://randomuser.me/api/portraits/men/45.jpg')">
-                        <h3>Luis Torres</h3><p>Ejecutivo Cuentas</p>
-                    </div>
+                    <div class="org-card" onclick="openRoleModal('Luis Torres', 'Ejecutivo de Cuentas', 'Nexo diario.', 'https://randomuser.me/api/portraits/men/45.jpg')"><h3>Luis Torres</h3><p>Ejecutivo Cuentas</p></div>
                 </div>
                 <div class="branch-item">
-                    <div class="org-card" onclick="openRoleModal('Ana Ruiz', 'Ejecutiva de Cuentas', 'Nexo diario con las marcas, seguimiento de KPIs y recepción de briefs.', 'https://randomuser.me/api/portraits/women/68.jpg')">
-                        <h3>Ana Ruiz</h3><p>Ejecutiva Cuentas</p>
-                    </div>
+                    <div class="org-card" onclick="openRoleModal('Ana Ruiz', 'Ejecutiva de Cuentas', 'Nexo diario.', 'https://randomuser.me/api/portraits/women/68.jpg')"><h3>Ana Ruiz</h3><p>Ejecutiva Cuentas</p></div>
                 </div>
             </div>
 
             <!-- Nivel 4 y 5: Departamentos Operativos -->
             <div class="tree-branch" style="align-items: flex-start;">
-                
                 <!-- RRPP -->
                 <div class="branch-item">
-                    <div class="org-card" onclick="openRoleModal('MariaJose Estrella', 'Relaciones Públicas', 'Estrategia de comunicación corporativa, manejo de crisis y relación con medios y stakeholders.', 'imgs/mariajose.jpg')">
-                        <h3>MariaJose Estrella</h3><p>Jefa RRPP</p>
-                    </div>
+                    <div class="org-card" onclick="openRoleModal('MariaJose Estrella', 'Relaciones Públicas', 'Estrategia corporativa.', 'imgs/mariajose.jpg')"><h3>MariaJose Estrella</h3><p>Jefa RRPP</p></div>
                     <div class="dept-column">
-                        <div class="org-card" onclick="openRoleModal('Clara Vega', 'Asistente RRPP', 'Monitoreo de medios, notas de prensa y gestión de base de datos.', 'https://randomuser.me/api/portraits/women/22.jpg')">
-                            <h3>Clara Vega</h3><span>Asistente</span>
-                        </div>
+                        <div class="org-card" onclick="openRoleModal('Clara Vega', 'Asistente RRPP', 'Monitoreo de medios.', 'https://randomuser.me/api/portraits/women/22.jpg')"><h3>Clara Vega</h3><span>Asistente</span></div>
                     </div>
                 </div>
 
                 <!-- Multimedia y Producción -->
                 <div class="branch-item">
-                    <div class="org-card" onclick="openRoleModal('Carlos Balseca', 'Director Multimedia', 'Jefe de producción audiovisual. Lidera al equipo técnico en rodajes, postproducción y entrega final.', 'imgs/carlos.jpg')">
-                        <h3>Carlos Balseca</h3><p>Director Multimedia</p>
-                    </div>
+                    <div class="org-card" onclick="openRoleModal('Carlos Balseca', 'Director Multimedia', 'Jefe de producción audiovisual.', 'imgs/carlos.jpg')"><h3>Carlos Balseca</h3><p>Director Multimedia</p></div>
                     <div class="dept-column">
-                        <div class="org-card" onclick="openRoleModal('David M.', 'Animador 2D/3D', 'Motion graphics, modelado y VFX.', 'https://randomuser.me/api/portraits/men/22.jpg')"><h3>David M.</h3><span>Animador</span></div>
-                        <div class="org-card" onclick="openRoleModal('Juan S.', 'Filmmaker', 'Operador de cámara y piloto de drones.', 'https://randomuser.me/api/portraits/men/23.jpg')"><h3>Juan S.</h3><span>Filmmaker</span></div>
-                        <div class="org-card" onclick="openRoleModal('Pedro L.', 'Editor Senior', 'Montaje, ritmo y Color Grading.', 'https://randomuser.me/api/portraits/men/24.jpg')"><h3>Pedro L.</h3><span>Editor Senior</span></div>
-                        <div class="org-card" onclick="openRoleModal('Tomas R.', 'Sonidista', 'Captura de audio, foley y mezcla.', 'https://randomuser.me/api/portraits/men/26.jpg')"><h3>Tomas R.</h3><span>Sonido</span></div>
-                        <div class="org-card" onclick="openRoleModal('Simon P.', 'Dir. Fotografía', 'Estética visual, encuadres y esquemas de luz.', 'https://randomuser.me/api/portraits/men/27.jpg')"><h3>Simon P.</h3><span>DoP</span></div>
+                        <div class="org-card" onclick="openRoleModal('David M.', 'Animador 2D/3D', 'VFX.', 'https://randomuser.me/api/portraits/men/22.jpg')"><h3>David M.</h3><span>Animador</span></div>
+                        <div class="org-card" onclick="openRoleModal('Juan S.', 'Filmmaker', 'Operador de cámara.', 'https://randomuser.me/api/portraits/men/23.jpg')"><h3>Juan S.</h3><span>Filmmaker</span></div>
+                        <div class="org-card" onclick="openRoleModal('Pedro L.', 'Editor Senior', 'Montaje.', 'https://randomuser.me/api/portraits/men/24.jpg')"><h3>Pedro L.</h3><span>Editor Senior</span></div>
+                        <div class="org-card" onclick="openRoleModal('Tomas R.', 'Sonidista', 'Foley.', 'https://randomuser.me/api/portraits/men/26.jpg')"><h3>Tomas R.</h3><span>Sonido</span></div>
+                        <div class="org-card" onclick="openRoleModal('Simon P.', 'Dir. Fotografía', 'Estética visual.', 'https://randomuser.me/api/portraits/men/27.jpg')"><h3>Simon P.</h3><span>DoP</span></div>
                     </div>
                 </div>
 
                 <!-- Arte -->
                 <div class="branch-item">
-                    <div class="org-card" onclick="openRoleModal('Andres Rosero', 'Director de Arte', 'Asegura la coherencia visual, diseña key visuals y guía el estilo gráfico de las campañas.', 'imgs/andres.jpg')">
-                        <h3>Andres Rosero</h3><p>Director de Arte</p>
-                    </div>
+                    <div class="org-card" onclick="openRoleModal('Andres Rosero', 'Director de Arte', 'Coherencia visual.', 'imgs/andres.jpg')"><h3>Andres Rosero</h3><p>Director de Arte</p></div>
                     <div class="dept-column">
-                        <div class="org-card" onclick="openRoleModal('Laura Q.', 'Diseñadora', 'Adaptación de artes y diagramación.', 'https://randomuser.me/api/portraits/women/33.jpg')"><h3>Laura Q.</h3><span>Diseño Gráfico</span></div>
-                        <div class="org-card" onclick="openRoleModal('Camila T.', 'Diseñadora UI', 'Interfaces web y assets digitales.', 'https://randomuser.me/api/portraits/women/34.jpg')"><h3>Camila T.</h3><span>Diseño Digital</span></div>
+                        <div class="org-card" onclick="openRoleModal('Laura Q.', 'Diseñadora', 'Adaptación.', 'https://randomuser.me/api/portraits/women/33.jpg')"><h3>Laura Q.</h3><span>Diseño Gráfico</span></div>
+                        <div class="org-card" onclick="openRoleModal('Camila T.', 'Diseñadora UI', 'Interfaces.', 'https://randomuser.me/api/portraits/women/34.jpg')"><h3>Camila T.</h3><span>Diseño Digital</span></div>
                     </div>
                 </div>
 
                 <!-- Data & Digital -->
                 <div class="branch-item">
-                    <div class="org-card" onclick="openRoleModal('Dayanna Lopez', 'Data & Mkt Digital', 'Estrategia de performance, análisis de pauta, SEO y levantamiento de insights métricos.', 'imgs/dayanna.jpg')">
-                        <h3>Dayanna Lopez</h3><p>Dir. Digital & Data</p>
-                    </div>
+                    <div class="org-card" onclick="openRoleModal('Dayanna Lopez', 'Data & Mkt Digital', 'Estrategia de performance.', 'imgs/dayanna.jpg')"><h3>Dayanna Lopez</h3><p>Dir. Digital</p></div>
                     <div class="dept-column">
-                        <div class="org-card" onclick="openRoleModal('Kevin W.', 'Asistente Data', 'Minería de datos y dashboards en Looker Studio.', 'https://randomuser.me/api/portraits/men/35.jpg')">
-                            <h3>Kevin W.</h3><span>Asistente Digital</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Staff de Apoyo -->
-            <div class="side-staff-box">
-                <h3>Departamentos de Apoyo Transversal</h3>
-                <div class="side-staff-grid">
-                    <div class="org-card" onclick="openRoleModal('Valeria Ríos', 'Contabilidad', 'Gestión de flujo de caja, pago a proveedores, facturación y cálculo de nómina.', 'https://randomuser.me/api/portraits/women/41.jpg')">
-                        <h3>Valeria Ríos</h3><p>Contabilidad</p>
-                    </div>
-                    <div class="org-card" onclick="openRoleModal('Roberto Paz', 'Talento Humano', 'Clima laboral, reclutamiento, onboarding y gestión de contratos.', 'https://randomuser.me/api/portraits/men/41.jpg')">
-                        <h3>Roberto Paz</h3><p>Talento Humano</p>
-                    </div>
-                    <div class="org-card" onclick="openRoleModal('Don Julio', 'Servicios Generales', 'Mantenimiento del estudio, proveeduría de suministros y logística física.', 'https://randomuser.me/api/portraits/men/66.jpg')">
-                        <h3>Don Julio</h3><p>Servicios Generales</p>
+                        <div class="org-card" onclick="openRoleModal('Kevin W.', 'Asistente Data', 'Minería de datos.', 'https://randomuser.me/api/portraits/men/35.jpg')"><h3>Kevin W.</h3><span>Asistente Digital</span></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Botones de Acción -->
         <div class="action-buttons">
             <button class="btn-action" onclick="openModal('policyModal')">Políticas y Normativas</button>
             <button class="btn-action" onclick="openModal('pitchModal')">Pitch Cliente Exigente</button>
@@ -258,95 +229,131 @@
 
     <!-- ESTADO DE RESULTADOS MAGICO -->
     <section class="section-container">
-        <button class="btn-toggle" onclick="toggleFinance()">Bóveda de Gringotts (Presupuestos)</button>
+        <button class="btn-toggle" onclick="toggleFinance()">Bóveda de Gringotts (Presupuestos & SRI)</button>
         
         <div class="finance-panel" id="financePanel">
-            <p style="margin-bottom: 1rem; color: var(--text-muted); font-size: 0.9rem;">
-                <em>* Valores en Galeones. Gastos optimizados para rentabilidad. Presiona <strong>Ctrl + .</strong> para habilitar edición (USD Referencial: $6.64 = 1 Galeón).</em>
+            
+            <div class="conversion-banner">
+                ℹ️ <strong>Aclaratoria Oficial:</strong> Todo el flujo financiero del simulador opera en <strong>Galeones</strong>. <br>
+                Tasa de cambio actual referencial: <strong>1 Galeón = $6.64 USD</strong>.
+            </div>
+
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">
+                <em>* Presiona <strong>Ctrl + .</strong> para habilitar edición manual de valores. Los impuestos se calculan automáticamente de la utilidad operativa.</em>
             </p>
             
-            <div class="finance-grid">
-                <!-- Nómina -->
-                <div class="finance-box">
-                    <h3 style="color: var(--neon-orange); margin-bottom: 1rem;">Nómina Base (22 Empleados)</h3>
-                    <div class="finance-row"><span>Dir (Jorge+Mateo) [$797]</span> <span><input type="number" class="calc-input salary" value="120" readonly> G</span></div>
-                    <div class="finance-row"><span>Cuentas (Jefa+3) [$1527]</span> <span><input type="number" class="calc-input salary" value="230" readonly> G</span></div>
-                    <div class="finance-row"><span>RRPP (Majo+1) [$531]</span> <span><input type="number" class="calc-input salary" value="80" readonly> G</span></div>
-                    <div class="finance-row"><span>Multimedia (Dir+5) [$2390]</span> <span><input type="number" class="calc-input salary" value="360" readonly> G</span></div>
-                    <div class="finance-row"><span>Arte (Andres+2) [$1062]</span> <span><input type="number" class="calc-input salary" value="160" readonly> G</span></div>
-                    <div class="finance-row"><span>Data (Dayanna+1) [$730]</span> <span><input type="number" class="calc-input salary" value="110" readonly> G</span></div>
-                    <div class="finance-row"><span>Staff (Cont/RRHH/SG) [$930]</span> <span><input type="number" class="calc-input salary" value="140" readonly> G</span></div>
-                    <div class="finance-row total">
-                        <span>Subtotal Nómina</span> 
-                        <span id="totNominaDec" style="display:none;"></span>
-                        <div class="magic-currency" id="totNominaMag"></div>
+            <div class="dashboard-layout">
+                <!-- Zona de Tablas -->
+                <div class="finance-tables">
+                    <div class="finance-grid">
+                        <!-- Nómina -->
+                        <div class="finance-box">
+                            <h3 style="color: var(--neon-orange); margin-bottom: 1rem;">Nómina Base (22 Empleados)</h3>
+                            <div class="finance-row"><span>Dir (Jorge+Mateo) [$763]</span> <span><input type="number" class="calc-input salary" value="115" readonly> G</span></div>
+                            <div class="finance-row"><span>Cuentas (Jefa+3) [$1460]</span> <span><input type="number" class="calc-input salary" value="220" readonly> G</span></div>
+                            <div class="finance-row"><span>RRPP (Majo+1) [$498]</span> <span><input type="number" class="calc-input salary" value="75" readonly> G</span></div>
+                            <div class="finance-row"><span>Multimedia (Dir+5) [$2257]</span> <span><input type="number" class="calc-input salary" value="340" readonly> G</span></div>
+                            <div class="finance-row"><span>Arte (Andres+2) [$996]</span> <span><input type="number" class="calc-input salary" value="150" readonly> G</span></div>
+                            <div class="finance-row"><span>Data (Dayanna+1) [$697]</span> <span><input type="number" class="calc-input salary" value="105" readonly> G</span></div>
+                            <div class="finance-row"><span>Staff (Cont/RRHH) [$863]</span> <span><input type="number" class="calc-input salary" value="130" readonly> G</span></div>
+                            <div class="finance-row total">
+                                <span>Subtotal Nómina</span> 
+                                <div class="magic-currency" id="totNominaMag"></div>
+                            </div>
+                        </div>
+
+                        <!-- Operaciones -->
+                        <div class="finance-box">
+                            <h3 style="color: var(--neon-orange); margin-bottom: 1rem;">Operaciones y Cargas</h3>
+                            <div class="finance-row"><span>IESS (12.15%)</span> <span class="magic-currency" id="valIESS"></span></div>
+                            <div class="finance-row"><span>Décimos (16.66%)</span> <span class="magic-currency" id="valDecimos"></span></div>
+                            <div class="finance-row"><span>Pauta Propia [$4800]</span> <span><input type="number" class="calc-input opex" value="723" readonly> G</span></div>
+                            <div class="finance-row"><span>Arriendo Estudio [$300]</span> <span><input type="number" class="calc-input opex" value="45" readonly> G</span></div>
+                            <div class="finance-row"><span>Servicios Básicos [$86]</span> <span><input type="number" class="calc-input opex" value="13" readonly> G</span></div>
+                            <div class="finance-row"><span>Internet F. Óptica [$53]</span> <span><input type="number" class="calc-input opex" value="8" readonly> G</span></div>
+                            <div class="finance-row"><span>Software/Cloud [$119]</span> <span><input type="number" class="calc-input opex" value="18" readonly> G</span></div>
+                            <div class="finance-row total">
+                                <span>Total Operaciones</span> 
+                                <div class="magic-currency" id="totOpsMag"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Caja de Impuestos -->
+                    <div class="finance-box taxes-box" style="margin-top: 1.5rem;">
+                        <h3 style="color: #ffd700; margin-bottom: 1rem;">Tributación y Beneficios de Ley (Ecuador)</h3>
+                        <div class="finance-row"><span>Utilidad Operativa Bruta (EBITDA)</span> <span class="magic-currency" id="valEbitda" style="font-weight: bold;"></span></div>
+                        <div class="finance-row"><span>15% Participación a Trabajadores</span> <span class="magic-currency" id="valParticipacion" style="color:#ff6b6b;"></span></div>
+                        <div class="finance-row"><span>25% Impuesto a la Renta (SRI)</span> <span class="magic-currency" id="valRenta" style="color:#ff6b6b;"></span></div>
+                    </div>
+
+                    <!-- Resumen Financiero NETO -->
+                    <div class="dashboard-stats">
+                        <div class="stat-item">
+                            <span>Facturación Mensual</span>
+                            <span class="stat-value"><input type="number" id="ingresoTotal" class="calc-input" value="7000" readonly style="font-size: 1.5rem; width:120px; font-weight:bold; color:white;"></span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Egresos Operativos</span>
+                            <span class="stat-value magic-currency" id="egresoTotal" style="color: #ff3333; font-size:1.2rem; margin-top:10px;"></span>
+                        </div>
+                        <div class="stat-item" style="border-top: 2px solid #33ff77; padding-top:10px;">
+                            <span style="color:#33ff77;">Utilidad Líquida (Neta)</span>
+                            <span class="stat-value magic-currency" id="flujoCaja" style="font-size:1.2rem; margin-top:10px; color:#33ff77;"></span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Margen Neto Final</span>
+                            <span class="stat-value" id="margenPorcentaje" style="color: var(--neon-orange);"></span>
+                        </div>
+                    </div>
+
+                    <!-- Gráfico -->
+                    <div class="chart-wrapper">
+                        <h3 style="text-align:center; color:var(--neon-orange); font-size:1.1rem; margin-bottom:1rem;">Distribución del Gasto Operativo</h3>
+                        <div class="expense-chart">
+                            <div class="bar-segment segment-nomina" id="barNomina" style="width: 0%;"></div>
+                            <div class="bar-segment segment-cargas" id="barCargas" style="width: 0%;"></div>
+                            <div class="bar-segment segment-opex" id="barOpex" style="width: 0%;"></div>
+                        </div>
+                        <div class="chart-legend">
+                            <div class="legend-item"><div class="dot segment-nomina"></div><span>Nómina Base</span></div>
+                            <div class="legend-item"><div class="dot segment-cargas"></div><span>Cargas Legales</span></div>
+                            <div class="legend-item"><div class="dot segment-opex"></div><span>Operaciones/Pauta</span></div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Operaciones -->
-                <div class="finance-box">
-                    <h3 style="color: var(--neon-orange); margin-bottom: 1rem;">Operaciones y Cargas</h3>
-                    <div class="finance-row"><span>IESS (12.15%)</span> <span class="magic-currency" id="valIESS"></span></div>
-                    <div class="finance-row"><span>Décimos (16.66%)</span> <span class="magic-currency" id="valDecimos"></span></div>
-                    <div class="finance-row"><span>Pauta Propia [$5000]</span> <span><input type="number" class="calc-input opex" value="753" readonly> G</span></div>
-                    <div class="finance-row"><span>Arriendo Estudio [$332]</span> <span><input type="number" class="calc-input opex" value="50" readonly> G</span></div>
-                    <div class="finance-row"><span>Agua/Luz x22 [$100]</span> <span><input type="number" class="calc-input opex" value="15" readonly> G</span></div>
-                    <div class="finance-row"><span>Internet Fibra [$66]</span> <span><input type="number" class="calc-input opex" value="10" readonly> G</span></div>
-                    <div class="finance-row"><span>Mantenimiento [$100]</span> <span><input type="number" class="calc-input opex" value="15" readonly> G</span></div>
-                    <div class="finance-row"><span>Suministros [$66]</span> <span><input type="number" class="calc-input opex" value="10" readonly> G</span></div>
-                    <div class="finance-row"><span>Software y Cloud [$133]</span> <span><input type="number" class="calc-input opex" value="20" readonly> G</span></div>
-                    <div class="finance-row total">
-                        <span>Total Operaciones</span> 
-                        <div class="magic-currency" id="totOpsMag"></div>
+                <!-- Zona de Calculadora -->
+                <div class="calculator-widget">
+                    <h3>Calculadora Rápida</h3>
+                    <div class="calc-display" id="calcDisplay">0</div>
+                    <div class="calc-grid">
+                        <button class="calc-btn clear" onclick="clearCalc()">C</button>
+                        <button class="calc-btn op" onclick="pressCalc('(')">(</button>
+                        <button class="calc-btn op" onclick="pressCalc(')')">)</button>
+                        <button class="calc-btn op" onclick="pressCalc('/')">÷</button>
+                        
+                        <button class="calc-btn" onclick="pressCalc('7')">7</button>
+                        <button class="calc-btn" onclick="pressCalc('8')">8</button>
+                        <button class="calc-btn" onclick="pressCalc('9')">9</button>
+                        <button class="calc-btn op" onclick="pressCalc('*')">×</button>
+                        
+                        <button class="calc-btn" onclick="pressCalc('4')">4</button>
+                        <button class="calc-btn" onclick="pressCalc('5')">5</button>
+                        <button class="calc-btn" onclick="pressCalc('6')">6</button>
+                        <button class="calc-btn op" onclick="pressCalc('-')">−</button>
+                        
+                        <button class="calc-btn" onclick="pressCalc('1')">1</button>
+                        <button class="calc-btn" onclick="pressCalc('2')">2</button>
+                        <button class="calc-btn" onclick="pressCalc('3')">3</button>
+                        <button class="calc-btn op" onclick="pressCalc('+')">+</button>
+                        
+                        <button class="calc-btn" onclick="pressCalc('0')" style="grid-column: span 2;">0</button>
+                        <button class="calc-btn" onclick="pressCalc('.')">.</button>
+                        <button class="calc-btn eq" onclick="calculateResult()">=</button>
                     </div>
                 </div>
             </div>
-
-            <!-- Resumen Financiero -->
-            <div class="dashboard-stats">
-                <div class="stat-item">
-                    <span>Facturación del mes</span>
-                    <span class="stat-value"><input type="number" id="ingresoTotal" class="calc-input" value="7000" readonly style="font-size: 1.5rem; width:120px; font-weight:bold; color:white;"></span>
-                </div>
-                <div class="stat-item">
-                    <span>Egresos Totales</span>
-                    <span class="stat-value magic-currency" id="egresoTotal" style="color: #ff3333; font-size:1.2rem; margin-top:10px;"></span>
-                </div>
-                <div class="stat-item">
-                    <span>Flujo de Caja Libre</span>
-                    <span class="stat-value magic-currency" id="flujoCaja" style="font-size:1.2rem; margin-top:10px;"></span>
-                </div>
-                <div class="stat-item">
-                    <span>Margen Neto</span>
-                    <span class="stat-value" id="margenPorcentaje" style="color: var(--neon-orange);"></span>
-                </div>
-            </div>
-
-            <!-- Gráfico de Distribución del Gasto -->
-            <div class="chart-wrapper">
-                <h3 class="chart-title">Distribución del Gasto Total</h3>
-                <div class="expense-chart">
-                    <div class="bar-segment segment-nomina" id="barNomina" style="width: 0%;"></div>
-                    <div class="bar-segment segment-cargas" id="barCargas" style="width: 0%;"></div>
-                    <div class="bar-segment segment-opex" id="barOpex" style="width: 0%;"></div>
-                </div>
-                <div class="chart-legend">
-                    <div class="legend-item">
-                        <div class="dot segment-nomina"></div>
-                        <span>Nómina Base (<span id="pctNomina">0</span>%)</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="dot segment-cargas"></div>
-                        <span>Cargas Legales (<span id="pctCargas">0</span>%)</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="dot segment-opex"></div>
-                        <span>Operaciones/Pauta (<span id="pctOpex">0</span>%)</span>
-                    </div>
-                </div>
-            </div>
-
-            <p style="text-align:center; margin-top: 1rem; font-size: 0.9rem;" id="warningText"></p>
         </div>
     </section>
 
@@ -365,85 +372,48 @@
         </div>
     </div>
 
-    <!-- MODAL 2: Políticas y Normativas (Detallado Corporate) -->
+    <!-- MODAL 2: Políticas -->
     <div class="modal-overlay" id="policyModal" onclick="closeOnOutsideClick(event, 'policyModal')">
         <div class="modal-content">
             <button class="close-btn" onclick="closeAllModals()">×</button>
             <h2 class="modal-title">SOP: Políticas y Normativas Internas</h2>
             <p class="modal-subtitle">Documento Oficial de Operaciones - Agencia Puerto Naranja v.2.1</p>
-            
             <div class="modal-text-content">
                 <h3>1. Flujo de Trabajo y Sistema de Ticketing</h3>
-                <p>Para proteger el ecosistema creativo y evitar el "burnout" operativo, se establecen los siguientes parámetros irrevocables:</p>
                 <ul>
-                    <li><strong>Prohibición de Briefs Informales:</strong> Todo requerimiento debe ingresar mediante la plataforma de gestión de proyectos (Asana/Jira). Un mensaje de WhatsApp no constituye un pedido oficial.</li>
-                    <li><strong>Triangulación Obligatoria:</strong> Los departamentos operativos (Arte y Multimedia) no mantienen contacto directo con el cliente. La Ejecutiva de Cuentas es el escudo y filtro de toda solicitud.</li>
-                    <li><strong>Tiempos de Ejecución (SLAs):</strong> Campañas macro requieren 15 días laborables de planificación. Piezas gráficas o adaptaciones "Always On" requieren un mínimo de 48 horas de antelación. No existen "entregas para ayer" sin aprobación previa de un <em>Fee de Urgencia</em> (+35% del valor).</li>
+                    <li><strong>Prohibición de Briefs Informales:</strong> Todo pedido ingresa por Asana/Jira. No WhatsApp.</li>
+                    <li><strong>Triangulación:</strong> Operativos no contactan al cliente. Cuentas es el filtro.</li>
+                    <li><strong>Tiempos (SLAs):</strong> Campañas (15 días), Gráficas (48h). Urgencias +35% de fee.</li>
                 </ul>
-
-                <h3>2. Acuerdos de Confidencialidad y Manejo de Datos (NDA)</h3>
-                <p>Puerto Naranja maneja estrategias de alto nivel, por lo que la seguridad es prioritaria:</p>
+                <h3>2. Confidencialidad y Tributación (NDA)</h3>
                 <ul>
-                    <li>El equipo completo (incluyendo el departamento de Limpieza y Mantenimiento) firma un acuerdo de confidencialidad al ingreso.</li>
-                    <li><strong>Almacenamiento Cloud:</strong> Todos los editables (.prproj, .psd) son propiedad de la agencia. Deben guardarse en el servidor interno o Drive corporativo. Está prohibido el alojamiento de material sensible en discos duros personales no encriptados.</li>
+                    <li>Acuerdos de confidencialidad estrictos para toda la nómina de 22 personas.</li>
+                    <li>Todo material reside en el servidor Cloud. Propiedad intelectual de la agencia.</li>
                 </ul>
-
-                <h3>3. Rondas de Revisión (Milestone Review Process)</h3>
-                <p>Para garantizar el margen de utilidad financiera (objetivo >65%), se limita la iteración infinita:</p>
+                <h3>3. Rondas de Revisión</h3>
                 <ul>
-                    <li>Cada pieza o video tiene derecho a <strong>2 rondas de cambios consolidados</strong>.</li>
-                    <li>El cliente debe agrupar todo el feedback de sus departamentos (Legal, Marketing, Gerencia) en un solo documento. Comentarios a cuentagotas paralizan la producción y se contarán como una ronda nueva.</li>
-                    <li>A partir de la 3ra ronda, el Ejecutivo de Cuentas emitirá una factura adicional basada en la tarifa por hora del equipo involucrado.</li>
-                </ul>
-
-                <h3>4. Gestión de Crisis Digitales (Protocolo Código Rojo)</h3>
-                <p>Accionar inmediato ante ataques a la reputación de las marcas que manejamos:</p>
-                <ul>
-                    <li>El Analista de Data activa la alerta silenciosa al detectar picos inusuales de menciones negativas (Sentiment Analytics).</li>
-                    <li>Dirección de RRPP tiene <strong>30 minutos</strong> para redactar un "Holding Statement" (comunicado de espera para ganar tiempo).</li>
-                    <li>Queda estrictamente prohibido que cualquier miembro del equipo responda de forma personal o con ironía en los canales de la marca.</li>
+                    <li>Máximo <strong>2 rondas de cambios consolidados</strong>. A partir de la 3ra se factura hora extra.</li>
                 </ul>
             </div>
         </div>
     </div>
 
-    <!-- MODAL 3: Pitch Cliente Exigente (Con Guion) -->
+    <!-- MODAL 3: Pitch -->
     <div class="modal-overlay" id="pitchModal" onclick="closeOnOutsideClick(event, 'pitchModal')">
         <div class="modal-content">
             <button class="close-btn" onclick="closeAllModals()">×</button>
             <h2 class="modal-title">Playbook: Pitch Ejecutivo</h2>
-            <p class="modal-subtitle">Estrategia de cierre y manejo de objeciones para clientes Tier-1.</p>
-            
             <div class="modal-text-content">
                 <h3>El Enfoque: Sabiduría + Osadía</h3>
-                <p>Los clientes exigentes (grandes transnacionales, corporaciones tradicionales) suelen estar cansados de las agencias "boutique" que solo venden humo, o de las agencias tradicionales que son demasiado lentas. Nuestra postura debe ser contundente: mostramos la solidez y estructura de los grandes, pero golpeamos con la frescura, el desenfreno y la velocidad que demanda el mundo digital de hoy.</p>
-                
-                <h3>Estructura del Pitch</h3>
-                <ul>
-                    <li><strong>Minuto 0-5 (El Manifiesto):</strong> No empezamos mostrando un PPT aburrido. Arrancamos con un video showreel inmersivo (producido por el equipo Multimedia) que despierte adrenalina pura.</li>
-                    <li><strong>Minuto 5-15 (La Estructura Acorazada):</strong> Abrimos el organigrama. Les mostramos que no tercerizamos nada. Tenemos RRPP, Data y Producción "in-house".</li>
-                    <li><strong>Minuto 15-20 (El Cierre Analítico):</strong> Dayanna (Data) muestra cómo esa creatividad explosiva se mide en KPIs y retorno de inversión real.</li>
-                </ul>
-
-                <h3>Guion de Cierre (Ejemplo Práctico en Mesa)</h3>
-                <p><em>Contexto: El cliente duda de nuestra capacidad de respuesta frente a campañas que cambian de la noche a la mañana.</em></p>
-                
+                <p>Mostramos estructura de grandes, pero con velocidad y agresividad digital.</p>
                 <div class="script-box">
                     <div class="script-line">
-                        <span class="script-role">Cliente Exigente (CEO):</span>
-                        <span class="script-text">"He trabajado con agencias que hacen cosas bonitas, pero cuando la competencia lanza una promo agresiva y necesito un spot de respuesta en dos días, se ahogan en burocracia."</span>
+                        <span class="script-role">CEO Cliente:</span>
+                        <span class="script-text">"Necesito respuesta rápida ante la competencia, sin burocracia."</span>
                     </div>
                     <div class="script-line">
-                        <span class="script-role">Mateo (Jefe de Negocios):</span>
-                        <span class="script-text">"Lo entendemos perfectamente. Y esa es exactamente la razón por la que no cobramos como una agencia freelance. Si revisa nuestra estructura, verá que tenemos a 22 profesionales bajo un mismo techo."</span>
-                    </div>
-                    <div class="script-line">
-                        <span class="script-role">Dirección Creativa / Multimedia:</span>
-                        <span class="script-text">"Aquí no llamamos a productoras externas para ver si tienen agenda. Tenemos a nuestros directores, animadores, sonidistas y estrategas listos. Cuando el mercado exige respuesta, nosotros no agendamos reuniones para pensar; entramos al estudio, grabamos y pautamos. Le ofrecemos la madurez y la experiencia estratégica para no equivocarnos en el mensaje, combinada con la osadía y la velocidad para que su marca pegue primero."</span>
-                    </div>
-                    <div class="script-line">
-                        <span class="script-role">Nicole (Jefa de Cuentas):</span>
-                        <span class="script-text">"Y nuestro panel de Data rastreará esa agresividad en tiempo real. No le prometemos solo creatividad, le prometemos infraestructura militar a su servicio."</span>
+                        <span class="script-role">Dir. Multimedia:</span>
+                        <span class="script-text">"Por eso no tercerizamos. Tenemos animadores, sonidistas y estrategas listos in-house. Le ofrecemos madurez para no fallar y osadía para pegar primero."</span>
                     </div>
                 </div>
             </div>
@@ -451,7 +421,7 @@
     </div>
 
     <script>
-        // Lógica de Modales
+        // Modales
         function closeAllModals() { document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active')); }
         function closeOnOutsideClick(event, modalId) { if (event.target.id === modalId) closeAllModals(); }
         function openModal(modalId) { closeAllModals(); document.getElementById(modalId).classList.add('active'); }
@@ -478,7 +448,7 @@
             }
         });
 
-        // Calculadora Monetaria
+        // Formato Moneda
         function formatMagicalCurrency(decimalGaleons) {
             let isNegative = decimalGaleons < 0;
             let val = Math.abs(decimalGaleons);
@@ -489,75 +459,100 @@
             let k = Math.round(k_decimal);
             if (k >= 29) { k = 0; s += 1; }
             if (s >= 17) { s = 0; g += 1; }
-            let result = `${g} Galeones, ${s} Sickles, ${k} Knuts`;
+            let result = `${g} G, ${s} S, ${k} K`;
             return isNegative ? `- ${result}` : result;
         }
 
-        // Lógica Financiera
+        // Lógica Financiera e Impuestos SRI
         function calculateFinances() {
-            // Nómina
+            // 1. Nómina y Cargas
             let totalSueldos = 0;
             document.querySelectorAll('.salary').forEach(input => totalSueldos += parseFloat(input.value) || 0);
             document.getElementById('totNominaMag').textContent = formatMagicalCurrency(totalSueldos);
 
-            // Cargas
             const iess = totalSueldos * 0.1215; 
             const decimos = totalSueldos * 0.1666; 
             const totalCargas = iess + decimos;
             document.getElementById('valIESS').textContent = formatMagicalCurrency(iess);
             document.getElementById('valDecimos').textContent = formatMagicalCurrency(decimos);
 
-            // Operaciones
+            // 2. Opex y Egresos Operativos Totales
             let totalOpex = 0;
             document.querySelectorAll('.opex').forEach(input => totalOpex += parseFloat(input.value) || 0);
             let subtotalOperaciones = totalCargas + totalOpex;
             document.getElementById('totOpsMag').textContent = formatMagicalCurrency(subtotalOperaciones);
 
-            // Resumen General
+            let egresoOperativo = totalSueldos + subtotalOperaciones;
+            document.getElementById('egresoTotal').textContent = formatMagicalCurrency(egresoOperativo);
+
+            // 3. Cálculo de Utilidad Operativa (EBITDA)
             let ingresoTotal = parseFloat(document.getElementById('ingresoTotal').value) || 0;
-            let egresoTotal = totalSueldos + subtotalOperaciones; 
-            let flujoCaja = ingresoTotal - egresoTotal;
-            let margen = (flujoCaja / ingresoTotal) * 100;
+            let ebitda = ingresoTotal - egresoOperativo;
+            document.getElementById('valEbitda').textContent = formatMagicalCurrency(ebitda);
 
-            document.getElementById('egresoTotal').textContent = formatMagicalCurrency(egresoTotal);
-            document.getElementById('flujoCaja').textContent = formatMagicalCurrency(flujoCaja);
-            document.getElementById('flujoCaja').style.color = flujoCaja >= 0 ? '#33ff77' : '#ff3333';
-            document.getElementById('margenPorcentaje').textContent = (isNaN(margen) || !isFinite(margen) ? "0.00" : margen.toFixed(2)) + "%";
+            // 4. Impuestos y Ley (15% Trabajadores, 25% Renta)
+            let participacion = 0;
+            let impuestoRenta = 0;
+            let utilidadNeta = ebitda;
 
-            // Alertas
-            const warning = document.getElementById('warningText');
-            if(flujoCaja < 0) {
-                warning.style.color = '#ff3333';
-                warning.textContent = "ALERTA FINANCIERA: Estructura en pérdida.";
-            } else if (margen >= 65) {
-                warning.style.color = '#33ff77';
-                warning.textContent = "ESTADO ÓPTIMO: El margen de rentabilidad supera el objetivo del 65%.";
-            } else {
-                warning.style.color = '#ffd700';
-                warning.textContent = "ALERTA DE RENTABILIDAD: El margen está por debajo del 65% exigido.";
+            if (ebitda > 0) {
+                participacion = ebitda * 0.15;
+                let baseImponible = ebitda - participacion;
+                impuestoRenta = baseImponible * 0.25;
+                utilidadNeta = ebitda - participacion - impuestoRenta;
             }
 
-            // Actualización Gráfica de Distribución
-            if(egresoTotal > 0) {
-                let pctNomina = (totalSueldos / egresoTotal) * 100;
-                let pctCargas = (totalCargas / egresoTotal) * 100;
-                let pctOpex = (totalOpex / egresoTotal) * 100;
+            document.getElementById('valParticipacion').textContent = `- ${formatMagicalCurrency(participacion)}`;
+            document.getElementById('valRenta').textContent = `- ${formatMagicalCurrency(impuestoRenta)}`;
 
-                document.getElementById('barNomina').style.width = pctNomina + '%';
-                document.getElementById('barCargas').style.width = pctCargas + '%';
-                document.getElementById('barOpex').style.width = pctOpex + '%';
+            // 5. Resultados Finales Netos
+            document.getElementById('flujoCaja').textContent = formatMagicalCurrency(utilidadNeta);
+            let margenNeto = (utilidadNeta / ingresoTotal) * 100;
+            document.getElementById('margenPorcentaje').textContent = (isNaN(margenNeto) || !isFinite(margenNeto) ? "0.00" : margenNeto.toFixed(2)) + "%";
 
-                document.getElementById('pctNomina').textContent = pctNomina.toFixed(1);
-                document.getElementById('pctCargas').textContent = pctCargas.toFixed(1);
-                document.getElementById('pctOpex').textContent = pctOpex.toFixed(1);
+            // Gráfico de Barras (Basado en el Gasto Operativo)
+            if(egresoOperativo > 0) {
+                document.getElementById('barNomina').style.width = ((totalSueldos / egresoOperativo) * 100) + '%';
+                document.getElementById('barCargas').style.width = ((totalCargas / egresoOperativo) * 100) + '%';
+                document.getElementById('barOpex').style.width = ((totalOpex / egresoOperativo) * 100) + '%';
             }
         }
 
         document.querySelectorAll('.calc-input').forEach(input => {
             input.addEventListener('input', calculateFinances);
         });
-
         calculateFinances();
+
+        // Lógica Calculadora
+        let calcVal = "0";
+        function updateDisplay() {
+            document.getElementById('calcDisplay').innerText = calcVal;
+        }
+        function pressCalc(val) {
+            if (calcVal === "0" && val !== ".") {
+                calcVal = val;
+            } else {
+                calcVal += val;
+            }
+            updateDisplay();
+        }
+        function clearCalc() {
+            calcVal = "0";
+            updateDisplay();
+        }
+        function calculateResult() {
+            try {
+                // Reemplazos seguros para eval visual
+                let expression = calcVal.replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-');
+                let result = Function('"use strict";return (' + expression + ')')();
+                calcVal = Number.isInteger(result) ? result.toString() : result.toFixed(2).toString();
+                updateDisplay();
+            } catch (e) {
+                calcVal = "Error";
+                updateDisplay();
+                setTimeout(clearCalc, 1500);
+            }
+        }
     </script>
 </body>
 </html>
