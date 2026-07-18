@@ -29,81 +29,21 @@
         .section-container { background: var(--surface-color); border-radius: var(--border-radius); padding: 2rem; margin-bottom: 2rem; border: 1px solid rgba(255, 94, 0, 0.2); }
 
         /* --- Organigrama Masivo (CSS Grid / Flex / Árbol Mejorado) --- */
-        .org-wrapper { overflow-x: auto; padding-bottom: 2rem; }
+        .org-wrapper { overflow-x: auto; padding-bottom: 1rem; }
         
         .tree-level { display: flex; justify-content: center; gap: 2rem; position: relative; padding-top: 2rem; margin-top: 1rem; }
         .tree-level::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 2px; height: 2rem; background-color: var(--neon-orange); }
         .tree-level.root::before { display: none; }
         .tree-level.root { padding-top: 0; margin-top: 0; }
 
-        /* Contenedor de ramas sin borde superior general para evitar excedentes */
-        .tree-branch { 
-            position: relative; 
-            display: flex; 
-            justify-content: center; 
-            padding-top: 0; 
-            margin-top: 2rem; 
-        }
-        
-        /* Tallo principal que baja hacia la rama */
-        .tree-branch::before { 
-            content: ''; 
-            position: absolute; 
-            top: -2rem; 
-            left: 50%; 
-            transform: translateX(-50%); 
-            width: 2px; 
-            height: 2rem; 
-            background-color: var(--neon-orange); 
-        }
-        
-        /* Items individuales de la rama */
-        .branch-item { 
-            position: relative; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center;
-            padding: 2rem 1rem 0 1rem; /* Espacio superior para el tallo pequeño */
-        }
-        
-        /* Línea horizontal que conecta a los hermanos (se ajusta por item) */
-        .branch-item::before { 
-            content: ''; 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 2px; 
-            background-color: var(--neon-orange); 
-        }
-        
-        /* Tallo pequeño que baja desde la línea horizontal hacia la tarjeta */
-        .branch-item::after { 
-            content: ''; 
-            position: absolute; 
-            top: 0; 
-            left: 50%; 
-            transform: translateX(-50%); 
-            width: 2px; 
-            height: 2rem; 
-            background-color: var(--neon-orange); 
-        }
-        
-        /* MÁGIA CSS: Eliminar excedente izquierdo del primer elemento */
-        .branch-item:first-child::before {
-            left: 50%;
-            width: 50%;
-        }
-        
-        /* MÁGIA CSS: Eliminar excedente derecho del último elemento */
-        .branch-item:last-child::before {
-            width: 50%;
-        }
-        
-        /* Si solo hay un elemento, no necesita línea horizontal */
-        .branch-item:only-child::before {
-            display: none;
-        }
+        .tree-branch { position: relative; display: flex; justify-content: center; padding-top: 0; margin-top: 2rem; }
+        .tree-branch::before { content: ''; position: absolute; top: -2rem; left: 50%; transform: translateX(-50%); width: 2px; height: 2rem; background-color: var(--neon-orange); }
+        .branch-item { position: relative; display: flex; flex-direction: column; align-items: center; padding: 2rem 1rem 0 1rem; }
+        .branch-item::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background-color: var(--neon-orange); }
+        .branch-item::after { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 2px; height: 2rem; background-color: var(--neon-orange); }
+        .branch-item:first-child::before { left: 50%; width: 50%; }
+        .branch-item:last-child::before { width: 50%; }
+        .branch-item:only-child::before { display: none; }
 
         /* Tarjetas */
         .org-card { background: var(--bg-color); border: 1px solid rgba(255, 94, 0, 0.3); border-radius: var(--border-radius); padding: 1.5rem; text-align: center; cursor: pointer; transition: var(--transition); width: 220px; z-index: 2; position: relative; }
@@ -112,21 +52,36 @@
         .org-card p { color: var(--text-muted); font-size: 0.85rem; font-weight: bold; }
         .org-card span { display: block; font-size: 0.75rem; color: #666; margin-top: 0.5rem; }
 
-        /* Departamentos Verticales (Staff debajo de directores) */
+        /* Departamentos Verticales */
         .dept-column { display: flex; flex-direction: column; gap: 1rem; align-items: center; margin-top: 1rem; position: relative; padding-top: 1rem; }
         .dept-column::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 2px; height: 100%; background-color: rgba(255, 94, 0, 0.3); z-index: 0; }
 
-        /* Modal */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: var(--transition); z-index: 1000; }
+        /* Botones de Acción (Rubrica) */
+        .action-buttons { display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap; border-top: 1px dashed rgba(255, 94, 0, 0.3); padding-top: 2rem; }
+        .btn-action { background: transparent; color: var(--neon-orange); border: 2px solid var(--neon-orange); padding: 1rem 2rem; font-size: 1.1rem; font-weight: bold; border-radius: var(--border-radius); cursor: pointer; text-transform: uppercase; transition: var(--transition); letter-spacing: 1px; }
+        .btn-action:hover { background: var(--neon-orange); color: var(--bg-color); box-shadow: var(--neon-glow); transform: translateY(-3px); }
+
+        /* Modales */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: var(--transition); z-index: 1000; overflow-y: auto; padding: 2rem; }
         .modal-overlay.active { opacity: 1; pointer-events: all; }
-        .modal-content { background: var(--surface-color); padding: 2.5rem; border-radius: var(--border-radius); border: 1px solid var(--neon-orange); box-shadow: var(--neon-glow); max-width: 600px; width: 90%; position: relative; }
-        .close-btn { position: absolute; top: 15px; right: 20px; color: var(--neon-orange); font-size: 1.5rem; cursor: pointer; background: none; border: none; }
+        .modal-content { background: var(--surface-color); padding: 2.5rem; border-radius: var(--border-radius); border: 1px solid var(--neon-orange); box-shadow: var(--neon-glow); max-width: 700px; width: 100%; position: relative; max-height: 90vh; overflow-y: auto; }
         
+        /* Modal - Cabecera Role */
+        .close-btn { position: absolute; top: 15px; right: 20px; color: var(--neon-orange); font-size: 2rem; cursor: pointer; background: none; border: none; line-height: 1; }
         .modal-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; border-bottom: 1px dashed rgba(255, 94, 0, 0.3); padding-bottom: 1.5rem; }
         .modal-img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 2px solid var(--neon-orange); background: #1a1a1a; }
         #modalName { color: var(--neon-orange); font-size: 1.8rem; }
         #modalRole { color: var(--text-muted); font-size: 1rem; }
         #modalDesc { font-size: 1.05rem; line-height: 1.7; }
+
+        /* Modal - Texto Largo (Políticas / Pitch) */
+        .modal-title { color: var(--neon-orange); font-size: 1.8rem; margin-bottom: 0.5rem; border-bottom: 2px solid var(--neon-orange); padding-bottom: 0.5rem; }
+        .modal-subtitle { color: #888; font-style: italic; margin-bottom: 1.5rem; }
+        .modal-text-content h3 { color: var(--text-main); margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1.2rem; display: flex; align-items: center; gap: 0.5rem; }
+        .modal-text-content h3::before { content: '■'; color: var(--neon-orange); font-size: 0.8rem; }
+        .modal-text-content p { font-size: 1rem; line-height: 1.6; color: #b0b0b0; margin-bottom: 1rem; margin-left: 1.2rem; }
+        .modal-text-content ul { margin-left: 2.5rem; margin-bottom: 1rem; color: #b0b0b0; }
+        .modal-text-content li { margin-bottom: 0.3rem; }
 
         /* Finanzas */
         .btn-toggle { width: 100%; background: transparent; color: var(--neon-orange); border: 2px solid var(--neon-orange); padding: 1rem; font-size: 1.2rem; font-weight: bold; border-radius: var(--border-radius); cursor: pointer; text-transform: uppercase; }
@@ -151,6 +106,11 @@
         .side-staff-box { margin-top: 3rem; padding: 1.5rem; border: 1px dashed var(--neon-orange); border-radius: var(--border-radius); text-align: center; }
         .side-staff-box h3 { margin-bottom: 1rem; color: var(--neon-orange); }
         .side-staff-grid { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+        @media (max-width: 768px) {
+            .finance-grid { grid-template-columns: 1fr; }
+            .action-buttons { flex-direction: column; }
+        }
     </style>
 </head>
 <body>
@@ -161,22 +121,22 @@
     </header>
 
     <section class="section-container">
-        <h2>Estructura Organizacional (23 Profesionales)</h2>
+        <h2>Estructura Organizacional (22 Profesionales)</h2>
         
         <div class="org-wrapper">
             <!-- Nivel 1: Dirección -->
             <div class="tree-level root">
-                <div class="org-card" onclick="openModal('Jorge Yepez', 'CMO y Director Creativo', 'Dirección estratégica de la agencia, conceptualización de alto nivel y aprobación final de todas las campañas.', 'imgs/jorge.jpg')">
+                <div class="org-card" onclick="openRoleModal('Jorge Yepez', 'CMO y Director Creativo', 'Dirección estratégica de la agencia, conceptualización de alto nivel y aprobación final de todas las campañas.', 'imgs/jorge.jpg')">
                     <h3>Jorge Yepez</h3><p>CMO / Dir. Creativo</p>
                 </div>
-                <div class="org-card" onclick="openModal('Mateo Vargas', 'Jefe de Negocios', 'Búsqueda de nuevos clientes, alianzas estratégicas, proyecciones de rentabilidad y expansión comercial.', 'https://randomuser.me/api/portraits/men/32.jpg')">
+                <div class="org-card" onclick="openRoleModal('Mateo Vargas', 'Jefe de Negocios', 'Búsqueda de nuevos clientes, alianzas estratégicas, proyecciones de rentabilidad y expansión comercial.', 'https://randomuser.me/api/portraits/men/32.jpg')">
                     <h3>Mateo Vargas</h3><p>Jefe de Negocios</p>
                 </div>
             </div>
 
             <!-- Nivel 2: Cuentas -->
             <div class="tree-level">
-                <div class="org-card" onclick="openModal('Nicole Pinilla', 'Jefa de Cuentas', 'Líder del equipo de ejecutivos. Supervisa el flujo de comunicación y aprueba presupuestos de las marcas clave.', 'imgs/nicole.jpg')">
+                <div class="org-card" onclick="openRoleModal('Nicole Pinilla', 'Jefa de Cuentas', 'Líder del equipo de ejecutivos. Supervisa el flujo de comunicación y aprueba presupuestos de las marcas clave.', 'imgs/nicole.jpg')">
                     <h3>Nicole Pinilla</h3><p>Jefa de Cuentas</p>
                 </div>
             </div>
@@ -184,17 +144,17 @@
             <!-- Nivel 3: Ejecutivos -->
             <div class="tree-branch">
                 <div class="branch-item">
-                    <div class="org-card" onclick="openModal('Sofía Castro', 'Ejecutiva de Cuentas', 'Nexo diario con las marcas, seguimiento de KPIs y recepción de briefs.', 'https://randomuser.me/api/portraits/women/44.jpg')">
+                    <div class="org-card" onclick="openRoleModal('Sofía Castro', 'Ejecutiva de Cuentas', 'Nexo diario con las marcas, seguimiento de KPIs y recepción de briefs.', 'https://randomuser.me/api/portraits/women/44.jpg')">
                         <h3>Sofía Castro</h3><p>Ejecutiva Cuentas</p>
                     </div>
                 </div>
                 <div class="branch-item">
-                    <div class="org-card" onclick="openModal('Luis Torres', 'Ejecutivo de Cuentas', 'Nexo diario con las marcas, seguimiento de KPIs y recepción de briefs.', 'https://randomuser.me/api/portraits/men/45.jpg')">
+                    <div class="org-card" onclick="openRoleModal('Luis Torres', 'Ejecutivo de Cuentas', 'Nexo diario con las marcas, seguimiento de KPIs y recepción de briefs.', 'https://randomuser.me/api/portraits/men/45.jpg')">
                         <h3>Luis Torres</h3><p>Ejecutivo Cuentas</p>
                     </div>
                 </div>
                 <div class="branch-item">
-                    <div class="org-card" onclick="openModal('Ana Ruiz', 'Ejecutiva de Cuentas', 'Nexo diario con las marcas, seguimiento de KPIs y recepción de briefs.', 'https://randomuser.me/api/portraits/women/68.jpg')">
+                    <div class="org-card" onclick="openRoleModal('Ana Ruiz', 'Ejecutiva de Cuentas', 'Nexo diario con las marcas, seguimiento de KPIs y recepción de briefs.', 'https://randomuser.me/api/portraits/women/68.jpg')">
                         <h3>Ana Ruiz</h3><p>Ejecutiva Cuentas</p>
                     </div>
                 </div>
@@ -205,49 +165,48 @@
                 
                 <!-- RRPP -->
                 <div class="branch-item">
-                    <div class="org-card" onclick="openModal('MariaJose Estrella', 'Relaciones Públicas', 'Estrategia de comunicación corporativa, manejo de crisis y relación con medios y stakeholders.', 'imgs/mariajose.jpg')">
+                    <div class="org-card" onclick="openRoleModal('MariaJose Estrella', 'Relaciones Públicas', 'Estrategia de comunicación corporativa, manejo de crisis y relación con medios y stakeholders.', 'imgs/mariajose.jpg')">
                         <h3>MariaJose Estrella</h3><p>Jefa RRPP</p>
                     </div>
                     <div class="dept-column">
-                        <div class="org-card" onclick="openModal('Clara Vega', 'Asistente RRPP', 'Monitoreo de medios, notas de prensa y gestión de base de datos.', 'https://randomuser.me/api/portraits/women/22.jpg')">
+                        <div class="org-card" onclick="openRoleModal('Clara Vega', 'Asistente RRPP', 'Monitoreo de medios, notas de prensa y gestión de base de datos.', 'https://randomuser.me/api/portraits/women/22.jpg')">
                             <h3>Clara Vega</h3><span>Asistente</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Multimedia y Producción -->
+                <!-- Multimedia y Producción (Se eliminó al Gaffer, equipo de 5) -->
                 <div class="branch-item">
-                    <div class="org-card" onclick="openModal('Carlos Balseca', 'Director Multimedia', 'Jefe de producción audiovisual. Lidera al equipo técnico en rodajes, postproducción y entrega final.', 'imgs/carlos.jpg')">
+                    <div class="org-card" onclick="openRoleModal('Carlos Balseca', 'Director Multimedia', 'Jefe de producción audiovisual. Lidera al equipo técnico en rodajes, postproducción y entrega final.', 'imgs/carlos.jpg')">
                         <h3>Carlos Balseca</h3><p>Director Multimedia</p>
                     </div>
                     <div class="dept-column">
-                        <div class="org-card" onclick="openModal('David M.', 'Animador 2D/3D', 'Motion graphics, modelado y VFX.', 'https://randomuser.me/api/portraits/men/22.jpg')"><h3>David M.</h3><span>Animador</span></div>
-                        <div class="org-card" onclick="openModal('Juan S.', 'Filmmaker', 'Operador de cámara y piloto de drones.', 'https://randomuser.me/api/portraits/men/23.jpg')"><h3>Juan S.</h3><span>Filmmaker</span></div>
-                        <div class="org-card" onclick="openModal('Pedro L.', 'Editor Senior', 'Montaje, ritmo y Color Grading.', 'https://randomuser.me/api/portraits/men/24.jpg')"><h3>Pedro L.</h3><span>Editor Senior</span></div>
-                        <div class="org-card" onclick="openModal('Lucas G.', 'Gaffer', 'Esquemas de iluminación y eléctrica.', 'https://randomuser.me/api/portraits/men/25.jpg')"><h3>Lucas G.</h3><span>Iluminación</span></div>
-                        <div class="org-card" onclick="openModal('Tomas R.', 'Sonidista', 'Captura de audio, foley y mezcla.', 'https://randomuser.me/api/portraits/men/26.jpg')"><h3>Tomas R.</h3><span>Sonido</span></div>
-                        <div class="org-card" onclick="openModal('Simon P.', 'Dir. Fotografía', 'Estética visual y encuadres.', 'https://randomuser.me/api/portraits/men/27.jpg')"><h3>Simon P.</h3><span>DoP</span></div>
+                        <div class="org-card" onclick="openRoleModal('David M.', 'Animador 2D/3D', 'Motion graphics, modelado y VFX.', 'https://randomuser.me/api/portraits/men/22.jpg')"><h3>David M.</h3><span>Animador</span></div>
+                        <div class="org-card" onclick="openRoleModal('Juan S.', 'Filmmaker', 'Operador de cámara y piloto de drones.', 'https://randomuser.me/api/portraits/men/23.jpg')"><h3>Juan S.</h3><span>Filmmaker</span></div>
+                        <div class="org-card" onclick="openRoleModal('Pedro L.', 'Editor Senior', 'Montaje, ritmo y Color Grading.', 'https://randomuser.me/api/portraits/men/24.jpg')"><h3>Pedro L.</h3><span>Editor Senior</span></div>
+                        <div class="org-card" onclick="openRoleModal('Tomas R.', 'Sonidista', 'Captura de audio, foley y mezcla.', 'https://randomuser.me/api/portraits/men/26.jpg')"><h3>Tomas R.</h3><span>Sonido</span></div>
+                        <div class="org-card" onclick="openRoleModal('Simon P.', 'Dir. Fotografía', 'Estética visual, encuadres y esquemas de luz.', 'https://randomuser.me/api/portraits/men/27.jpg')"><h3>Simon P.</h3><span>DoP</span></div>
                     </div>
                 </div>
 
                 <!-- Arte -->
                 <div class="branch-item">
-                    <div class="org-card" onclick="openModal('Andres Rosero', 'Director de Arte', 'Asegura la coherencia visual, diseña key visuals y guía el estilo gráfico de las campañas.', 'imgs/andres.jpg')">
+                    <div class="org-card" onclick="openRoleModal('Andres Rosero', 'Director de Arte', 'Asegura la coherencia visual, diseña key visuals y guía el estilo gráfico de las campañas.', 'imgs/andres.jpg')">
                         <h3>Andres Rosero</h3><p>Director de Arte</p>
                     </div>
                     <div class="dept-column">
-                        <div class="org-card" onclick="openModal('Laura Q.', 'Diseñadora', 'Adaptación de artes y diagramación.', 'https://randomuser.me/api/portraits/women/33.jpg')"><h3>Laura Q.</h3><span>Diseño Gráfico</span></div>
-                        <div class="org-card" onclick="openModal('Camila T.', 'Diseñadora UI', 'Interfaces web y assets digitales.', 'https://randomuser.me/api/portraits/women/34.jpg')"><h3>Camila T.</h3><span>Diseño Digital</span></div>
+                        <div class="org-card" onclick="openRoleModal('Laura Q.', 'Diseñadora', 'Adaptación de artes y diagramación.', 'https://randomuser.me/api/portraits/women/33.jpg')"><h3>Laura Q.</h3><span>Diseño Gráfico</span></div>
+                        <div class="org-card" onclick="openRoleModal('Camila T.', 'Diseñadora UI', 'Interfaces web y assets digitales.', 'https://randomuser.me/api/portraits/women/34.jpg')"><h3>Camila T.</h3><span>Diseño Digital</span></div>
                     </div>
                 </div>
 
                 <!-- Data & Digital -->
                 <div class="branch-item">
-                    <div class="org-card" onclick="openModal('Dayanna Lopez', 'Data & Mkt Digital', 'Estrategia de performance, análisis de pauta, SEO y levantamiento de insights métricos.', 'imgs/dayanna.jpg')">
+                    <div class="org-card" onclick="openRoleModal('Dayanna Lopez', 'Data & Mkt Digital', 'Estrategia de performance, análisis de pauta, SEO y levantamiento de insights métricos.', 'imgs/dayanna.jpg')">
                         <h3>Dayanna Lopez</h3><p>Dir. Digital & Data</p>
                     </div>
                     <div class="dept-column">
-                        <div class="org-card" onclick="openModal('Kevin W.', 'Asistente Data', 'Minería de datos y dashboards en Looker Studio.', 'https://randomuser.me/api/portraits/men/35.jpg')">
+                        <div class="org-card" onclick="openRoleModal('Kevin W.', 'Asistente Data', 'Minería de datos y dashboards en Looker Studio.', 'https://randomuser.me/api/portraits/men/35.jpg')">
                             <h3>Kevin W.</h3><span>Asistente Digital</span>
                         </div>
                     </div>
@@ -259,17 +218,23 @@
             <div class="side-staff-box">
                 <h3>Departamentos de Apoyo Transversal</h3>
                 <div class="side-staff-grid">
-                    <div class="org-card" onclick="openModal('Valeria Ríos', 'Contabilidad', 'Gestión de flujo de caja, pago a proveedores, facturación y cálculo de nómina.', 'https://randomuser.me/api/portraits/women/41.jpg')">
+                    <div class="org-card" onclick="openRoleModal('Valeria Ríos', 'Contabilidad', 'Gestión de flujo de caja, pago a proveedores, facturación y cálculo de nómina.', 'https://randomuser.me/api/portraits/women/41.jpg')">
                         <h3>Valeria Ríos</h3><p>Contabilidad</p>
                     </div>
-                    <div class="org-card" onclick="openModal('Roberto Paz', 'Talento Humano', 'Clima laboral, reclutamiento, onboarding y gestión de contratos.', 'https://randomuser.me/api/portraits/men/41.jpg')">
+                    <div class="org-card" onclick="openRoleModal('Roberto Paz', 'Talento Humano', 'Clima laboral, reclutamiento, onboarding y gestión de contratos.', 'https://randomuser.me/api/portraits/men/41.jpg')">
                         <h3>Roberto Paz</h3><p>Talento Humano</p>
                     </div>
-                    <div class="org-card" onclick="openModal('Don Julio', 'Servicios Generales', 'Mantenimiento del estudio, proveeduría de suministros y logística física.', 'https://randomuser.me/api/portraits/men/66.jpg')">
+                    <div class="org-card" onclick="openRoleModal('Don Julio', 'Servicios Generales', 'Mantenimiento del estudio, proveeduría de suministros y logística física.', 'https://randomuser.me/api/portraits/men/66.jpg')">
                         <h3>Don Julio</h3><p>Servicios Generales</p>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Botones de Acción (Requisitos de la Rúbrica) -->
+        <div class="action-buttons">
+            <button class="btn-action" onclick="openModal('policyModal')">Políticas y Normativas</button>
+            <button class="btn-action" onclick="openModal('pitchModal')">Pitch Cliente Exigente</button>
         </div>
     </section>
 
@@ -279,20 +244,20 @@
         
         <div class="finance-panel" id="financePanel">
             <p style="margin-bottom: 1rem; color: var(--text-muted); font-size: 0.9rem;">
-                <em>* Valores ingresados en Galeones (Aterrizados a mercado EC: $6.64 = 1 Galeón). Presiona <strong>Ctrl + .</strong> para habilitar edición.</em>
+                <em>* Valores en Galeones. Ajustes: -30% Dirección | -8% Resto del equipo | 22 Empleados. Presiona <strong>Ctrl + .</strong> para habilitar edición.</em>
             </p>
             
             <div class="finance-grid">
                 <!-- Nómina -->
                 <div class="finance-box">
-                    <h3 style="color: var(--neon-orange); margin-bottom: 1rem;">Nómina (23 Empleados)</h3>
-                    <div class="finance-row"><span>Dir (Jorge+Mateo) [$3500]</span> <span><input type="number" class="calc-input salary" value="527" readonly> G</span></div>
-                    <div class="finance-row"><span>Cuentas (Jefa+3) [$3600]</span> <span><input type="number" class="calc-input salary" value="542" readonly> G</span></div>
-                    <div class="finance-row"><span>RRPP (Majo+1) [$1700]</span> <span><input type="number" class="calc-input salary" value="256" readonly> G</span></div>
-                    <div class="finance-row"><span>Multimedia (Dir+6) [$6200]</span> <span><input type="number" class="calc-input salary" value="934" readonly> G</span></div>
-                    <div class="finance-row"><span>Arte (Andres+2) [$2900]</span> <span><input type="number" class="calc-input salary" value="437" readonly> G</span></div>
-                    <div class="finance-row"><span>Data (Dayanna+1) [$2000]</span> <span><input type="number" class="calc-input salary" value="301" readonly> G</span></div>
-                    <div class="finance-row"><span>Staff (Cont/RRHH/SG) [$2100]</span> <span><input type="number" class="calc-input salary" value="316" readonly> G</span></div>
+                    <h3 style="color: var(--neon-orange); margin-bottom: 1rem;">Nómina (22 Empleados)</h3>
+                    <div class="finance-row"><span>Dir (Jorge+Mateo) [-30%]</span> <span><input type="number" class="calc-input salary" value="369" readonly> G</span></div>
+                    <div class="finance-row"><span>Cuentas (Jefa+3) [-8%]</span> <span><input type="number" class="calc-input salary" value="498" readonly> G</span></div>
+                    <div class="finance-row"><span>RRPP (Majo+1) [-8%]</span> <span><input type="number" class="calc-input salary" value="235" readonly> G</span></div>
+                    <div class="finance-row"><span>Multimedia (Dir+5) [-8%]</span> <span><input type="number" class="calc-input salary" value="762" readonly> G</span></div>
+                    <div class="finance-row"><span>Arte (Andres+2) [-8%]</span> <span><input type="number" class="calc-input salary" value="402" readonly> G</span></div>
+                    <div class="finance-row"><span>Data (Dayanna+1) [-8%]</span> <span><input type="number" class="calc-input salary" value="277" readonly> G</span></div>
+                    <div class="finance-row"><span>Staff (Cont/RRHH/SG) [-8%]</span> <span><input type="number" class="calc-input salary" value="291" readonly> G</span></div>
                     <div class="finance-row total">
                         <span>Subtotal Nómina</span> 
                         <span id="totNominaDec" style="display:none;"></span>
@@ -306,12 +271,12 @@
                     <div class="finance-row"><span>IESS (12.15%)</span> <span class="magic-currency" id="valIESS"></span></div>
                     <div class="finance-row"><span>Décimos (16.66%)</span> <span class="magic-currency" id="valDecimos"></span></div>
                     <div class="finance-row"><span>Pauta Propia [$5000]</span> <span><input type="number" class="calc-input opex" value="753" readonly> G</span></div>
-                    <div class="finance-row"><span>Arriendo Estudio [$1328]</span> <span><input type="number" class="calc-input opex" value="200" readonly> G</span></div>
-                    <div class="finance-row"><span>Agua/Luz x23 [$500]</span> <span><input type="number" class="calc-input opex" value="75" readonly> G</span></div>
-                    <div class="finance-row"><span>Internet Fibra [$166]</span> <span><input type="number" class="calc-input opex" value="25" readonly> G</span></div>
-                    <div class="finance-row"><span>Mantenimiento [$332]</span> <span><input type="number" class="calc-input opex" value="50" readonly> G</span></div>
-                    <div class="finance-row"><span>Suministros [$265]</span> <span><input type="number" class="calc-input opex" value="40" readonly> G</span></div>
-                    <div class="finance-row"><span>Software y Cloud [$398]</span> <span><input type="number" class="calc-input opex" value="60" readonly> G</span></div>
+                    <div class="finance-row"><span>Arriendo Estudio [-8%]</span> <span><input type="number" class="calc-input opex" value="184" readonly> G</span></div>
+                    <div class="finance-row"><span>Agua/Luz x22 [-8%]</span> <span><input type="number" class="calc-input opex" value="69" readonly> G</span></div>
+                    <div class="finance-row"><span>Internet Fibra [-8%]</span> <span><input type="number" class="calc-input opex" value="23" readonly> G</span></div>
+                    <div class="finance-row"><span>Mantenimiento [-8%]</span> <span><input type="number" class="calc-input opex" value="46" readonly> G</span></div>
+                    <div class="finance-row"><span>Suministros [-8%]</span> <span><input type="number" class="calc-input opex" value="37" readonly> G</span></div>
+                    <div class="finance-row"><span>Software y Cloud [-8%]</span> <span><input type="number" class="calc-input opex" value="55" readonly> G</span></div>
                     <div class="finance-row total">
                         <span>Total Operaciones</span> 
                         <div class="magic-currency" id="totOpsMag"></div>
@@ -322,8 +287,9 @@
             <!-- Resumen Financiero -->
             <div class="dashboard-stats">
                 <div class="stat-item">
-                    <span>Facturación (Galeones)</span>
-                    <span class="stat-value"><input type="number" id="ingresoTotal" class="calc-input" value="7000" readonly style="font-size: 1.5rem; width:120px; font-weight:bold; color:white;"></span>
+                    <span>Facturación Proyectada</span>
+                    <!-- Facturación ajustada a 14000 para forzar el margen del 65%+ -->
+                    <span class="stat-value"><input type="number" id="ingresoTotal" class="calc-input" value="14000" readonly style="font-size: 1.5rem; width:120px; font-weight:bold; color:white;"></span>
                 </div>
                 <div class="stat-item">
                     <span>Egresos Totales</span>
@@ -334,18 +300,18 @@
                     <span class="stat-value magic-currency" id="flujoCaja" style="font-size:1.2rem; margin-top:10px;"></span>
                 </div>
                 <div class="stat-item">
-                    <span>Margen</span>
+                    <span>Margen Neto</span>
                     <span class="stat-value" id="margenPorcentaje" style="color: var(--neon-orange);"></span>
                 </div>
             </div>
-            <p style="text-align:center; color: #ff3333; margin-top: 1rem; font-size: 0.85rem;" id="warningText"></p>
+            <p style="text-align:center; color: #33ff77; margin-top: 1rem; font-size: 0.9rem;" id="warningText"></p>
         </div>
     </section>
 
-    <!-- Modal -->
-    <div class="modal-overlay" id="roleModal" onclick="closeOnOutsideClick(event)">
+    <!-- MODAL 1: Ficha de Perfil -->
+    <div class="modal-overlay" id="roleModal" onclick="closeOnOutsideClick(event, 'roleModal')">
         <div class="modal-content">
-            <button class="close-btn" onclick="closeModal()">×</button>
+            <button class="close-btn" onclick="closeAllModals()">×</button>
             <div class="modal-header">
                 <img id="modalImg" src="" alt="Foto" class="modal-img">
                 <div>
@@ -357,9 +323,93 @@
         </div>
     </div>
 
+    <!-- MODAL 2: Políticas y Normativas -->
+    <div class="modal-overlay" id="policyModal" onclick="closeOnOutsideClick(event, 'policyModal')">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeAllModals()">×</button>
+            <h2 class="modal-title">Políticas y Normativas Internas</h2>
+            <p class="modal-subtitle">Proceso operativo estándar (SOP) para el equipo de Puerto Naranja.</p>
+            
+            <div class="modal-text-content">
+                <h3>1. Canalización de Requerimientos (Briefing)</h3>
+                <p>Paso fundamental para proteger el flujo de trabajo:</p>
+                <ul>
+                    <li>Todo pedido de cliente ingresa <strong>únicamente</strong> por la Ejecutiva de Cuentas asignada.</li>
+                    <li>Prohibido el contacto directo entre cliente y áreas operativas (Arte/Multimedia) sin un brief aprobado.</li>
+                    <li>Las horas de producción se agendan en el software interno con 48h de anticipación mínima.</li>
+                </ul>
+
+                <h3>2. Control Financiero y Presupuestos</h3>
+                <p>Pasos para la ejecución de gastos:</p>
+                <ul>
+                    <li>El departamento solicitante levanta una proforma (ej. pauta digital, viáticos de rodaje).</li>
+                    <li>Si el monto excede los 50 Galeones ($332 USD), requiere visto bueno del CMO.</li>
+                    <li>Contabilidad emite el pago los días 15 o 30 del mes.</li>
+                </ul>
+
+                <h3>3. Rondas de Revisión (Milestone Review)</h3>
+                <p>Para garantizar rentabilidad, se establecen límites creativos:</p>
+                <ul>
+                    <li>Entrega de V1 (Versión 1) al cliente.</li>
+                    <li>Recepción de feedback consolidado (no en mensajes aislados).</li>
+                    <li>Límite estricto de <strong>2 rondas de cambios</strong>. Ajustes adicionales se facturan por separado.</li>
+                </ul>
+
+                <h3>4. Gestión de Crisis (RRPP)</h3>
+                <p>Pasos de contención inmediata:</p>
+                <ul>
+                    <li>El equipo de Data levanta la alerta de crisis digital (comentarios negativos masivos, etc.).</li>
+                    <li>RRPP redacta un Holding Statement (comunicado de espera) en menos de 30 minutos.</li>
+                    <li>Dirección Creativa aprueba el tono del mensaje antes de la publicación oficial.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3: Pitch Ejecutivo -->
+    <div class="modal-overlay" id="pitchModal" onclick="closeOnOutsideClick(event, 'pitchModal')">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeAllModals()">×</button>
+            <h2 class="modal-title">Propuesta de Gestión: Cliente Exigente</h2>
+            <p class="modal-subtitle">Estrategia de comunicación y defensa de la estructura de 22 personas.</p>
+            
+            <div class="modal-text-content">
+                <h3>Paso 1: Establecer la Autoridad y el Manifiesto</h3>
+                <p>Arrancamos la reunión dejando clara nuestra identidad. Puerto Naranja no es una agencia burocrática más; somos una mezcla perfecta entre la <strong>sabiduría</strong> estratégica que exigen los grandes presupuestos y la <strong>osadía juvenil</strong> necesaria para romper el mercado. Demostramos que tenemos la experiencia de los grandes, combinada con la pasión, el desenfreno y la adrenalina que hace virales a las marcas.</p>
+
+                <h3>Paso 2: Justificar la Infraestructura (El Acorazado)</h3>
+                <p>Explicamos por qué 22 personas. Un cliente exigente requiere tiempos de respuesta inmediatos. Les mostramos que al tener departamentos In-House (Multimedia completo, RRPP, Data), no dependemos de terceros. El cliente no paga por intermediarios, paga por un equipo de élite listo para accionar.</p>
+
+                <h3>Paso 3: Transparencia Financiera (ROI)</h3>
+                <p>Usamos el panel financiero (Gringotts). Le mostramos al cliente que nuestra estructura cubre absolutamente todas las obligaciones laborales de ley (IESS, Décimos). Esto proyecta a Puerto Naranja como una empresa seria, blindando legalmente a la marca del cliente contra cualquier contingencia externa.</p>
+
+                <h3>Paso 4: El Compromiso de Resultados</h3>
+                <p>Cerramos la presentación con el equipo de Data & Digital. Garantizamos que nuestra "osadía creativa" no es un disparo al aire, sino que está respaldada por la minería de datos y un presupuesto de pauta de conversión optimizado (como nuestros 753 Galeones base). Creatividad explosiva, pero medida en ventas.</p>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Modal logic
-        function openModal(name, role, desc, imgSrc) {
+        // Modal logic general
+        function closeAllModals() {
+            document.querySelectorAll('.modal-overlay').forEach(modal => {
+                modal.classList.remove('active');
+            });
+        }
+
+        function closeOnOutsideClick(event, modalId) {
+            if (event.target.id === modalId) {
+                closeAllModals();
+            }
+        }
+
+        function openModal(modalId) {
+            closeAllModals();
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        // Modal específico para perfiles del organigrama
+        function openRoleModal(name, role, desc, imgSrc) {
             document.getElementById('modalName').textContent = name;
             document.getElementById('modalRole').textContent = role;
             document.getElementById('modalDesc').textContent = desc;
@@ -369,10 +419,9 @@
             imgElement.onerror = function() {
                 this.src = `https://ui-avatars.com/api/?name=${name.replace(' ', '+')}&background=1a1a1a&color=FF5E00`;
             };
-            document.getElementById('roleModal').classList.add('active');
+            openModal('roleModal');
         }
-        function closeModal() { document.getElementById('roleModal').classList.remove('active'); }
-        function closeOnOutsideClick(event) { if (event.target.id === 'roleModal') closeModal(); }
+
         function toggleFinance() { document.getElementById('financePanel').classList.toggle('open'); }
 
         // Ctrl + . Edit Mode
@@ -438,7 +487,11 @@
 
             const warning = document.getElementById('warningText');
             if(flujoCaja < 0) {
+                warning.style.color = '#ff3333';
                 warning.textContent = "ALERTA FINANCIERA: Estructura en pérdida. Ajuste presupuestos con Ctrl + .";
+            } else if (margen >= 65) {
+                warning.style.color = '#33ff77';
+                warning.textContent = "ESTADO ÓPTIMO: El margen de rentabilidad supera el objetivo del 65%.";
             } else {
                 warning.textContent = "";
             }
